@@ -5,459 +5,559 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>产业经济研究数据中心</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-    --bg: #ffffff;
-    --surface: #fafbfc;
-    --surface-raised: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-tertiary: #94a3b8;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
-    --accent: #0f172a;
-    --accent-blue: #2563eb;
-    --accent-green: #059669;
-    --accent-red: #dc2626;
-    --accent-amber: #d97706;
-    --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.04);
-    --shadow: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.06);
-    --shadow-lg: 0 4px 6px -1px rgba(0,0,0,0.06), 0 2px 4px -2px rgba(0,0,0,0.06);
+    --navy: #1a3a5c;
+    --navy-deep: #0f2744;
+    --navy-light: #2d5a8a;
+    --red: #b91c3a;
+    --red-light: #dc3545;
+    --gold: #c9a227;
+    --gold-light: #d4b84a;
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --text2: #4a4a5a;
+    --text3: #8a8a9a;
+    --border: #e2e4e8;
+    --border-light: #f0f1f4;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-    background: var(--surface);
-    color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'PingFang SC','Microsoft YaHei','Noto Sans SC',-apple-system,sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh;
 }
-.db-shell {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 32px 40px 48px;
+.db { max-width: 1680px; margin:0 auto; padding:0 32px 40px; }
+
+/* ===== Header ===== */
+.header {
+    background: linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 60%,var(--navy-light) 100%);
+    margin: 0 -32px 28px;
+    padding: 24px 32px 20px;
+    position: relative;
+    overflow: hidden;
 }
-.top-bar {
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg,var(--red) 0%,var(--gold) 50%,var(--red) 100%);
+}
+.header-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 32px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-light);
+    position: relative;
+    z-index: 1;
 }
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-icon {
+    width: 44px; height: 44px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px; font-weight: 700;
+    box-shadow: 0 4px 12px rgba(185,28,58,0.3);
 }
-.brand-mark {
-    width: 40px; height: 40px;
-    background: var(--accent);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
+.brand-text h1 { font-size: 24px; font-weight: 600; color: #fff; letter-spacing: 1px; }
+.brand-text p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 3px; letter-spacing: 2px; }
+.header-meta { text-align: right; }
+.header-meta .date { font-size: 13px; color: rgba(255,255,255,0.8); }
+.header-meta .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 6px; padding: 4px 14px;
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15); border-radius: 20px;
+    font-size: 12px; color: #fff;
 }
-.brand-text h1 {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    color: var(--text-primary);
-    line-height: 1.2;
-}
-.brand-text p {
-    font-size: 13px;
-    color: var(--text-tertiary);
-    margin-top: 2px;
-    font-weight: 400;
-}
-.meta-info {
-    text-align: right;
-}
-.meta-info .date {
-    font-size: 13px;
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-.meta-info .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 6px;
-    font-size: 12px;
-    color: var(--text-tertiary);
-    background: var(--border-light);
-    padding: 4px 12px;
-    border-radius: 20px;
-}
-.status-dot {
-    width: 6px; height: 6px;
-    background: var(--accent-green);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-.kpi-strip {
+.dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* ===== KPI Cards ===== */
+.kpi-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5,1fr);
     gap: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
-.kpi-tile {
-    background: var(--surface-raised);
+.kpi-card {
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 24px;
-    transition: all 0.2s ease;
-    cursor: default;
+    padding: 22px;
+    position: relative;
+    transition: all 0.3s ease;
 }
-.kpi-tile:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-1px);
-    border-color: var(--border);
+.kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.kpi-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0; height: 3px;
+    border-radius: 12px 12px 0 0;
 }
-.kpi-tile .k-label {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 500;
-    margin-bottom: 10px;
+.kpi-card:nth-child(1)::before { background: linear-gradient(90deg,var(--red),#e85d75); }
+.kpi-card:nth-child(2)::before { background: linear-gradient(90deg,var(--navy),var(--navy-light)); }
+.kpi-card:nth-child(3)::before { background: linear-gradient(90deg,var(--gold),#e8c84a); }
+.kpi-card:nth-child(4)::before { background: linear-gradient(90deg,#059669,#34d399); }
+.kpi-card:nth-child(5)::before { background: linear-gradient(90deg,#7c3aed,#a78bfa); }
+.kpi-label {
+    font-size: 11px; color: var(--text3); text-transform: uppercase;
+    letter-spacing: 1px; font-weight: 500; margin-bottom: 8px;
 }
-.kpi-tile .k-value {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-    font-variant-numeric: tabular-nums;
+.kpi-value {
+    font-size: 30px; font-weight: 700; color: var(--text);
+    line-height: 1.1; font-variant-numeric: tabular-nums;
 }
-.kpi-tile .k-sub {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    font-size: 13px;
+.kpi-unit { font-size: 14px; color: var(--text3); font-weight: 500; margin-left: 2px; }
+.kpi-sub {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 10px; font-size: 12px;
 }
-.kpi-tile .k-sub .change {
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 12px;
+.kpi-sub .chg {
+    font-weight: 600; padding: 2px 8px; border-radius: 4px; font-size: 11px;
 }
-.kpi-tile .k-sub .change.up {
-    color: var(--accent-green);
-    background: #ecfdf5;
+.chg-up { color: var(--red); background: #fef2f2; }
+.chg-down { color: #059669; background: #ecfdf5; }
+.chg-flat { color: var(--text3); background: var(--border-light); }
+
+/* ===== Section ===== */
+.sec-title {
+    font-size: 14px; font-weight: 600; color: var(--navy);
+    margin: 28px 0 16px;
+    display: flex; align-items: center; gap: 10px;
 }
-.kpi-tile .k-sub .change.down {
-    color: var(--accent-red);
-    background: #fef2f2;
+.sec-title::before {
+    content: ''; width: 4px; height: 18px;
+    background: linear-gradient(180deg,var(--red),var(--gold));
+    border-radius: 2px;
 }
-.kpi-tile .k-sub .period {
-    color: var(--text-tertiary);
-    font-size: 12px;
+.sec-title::after {
+    content: ''; flex:1; height: 1px;
+    background: linear-gradient(90deg,var(--border),transparent);
 }
-.section-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border-light);
-}
-.main-grid {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
+
+/* ===== Grid ===== */
+.grid-3 { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-bottom: 18px; }
+
 .card {
-    background: var(--surface-raised);
+    background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
 }
-.card-header {
-    padding: 18px 22px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.card-h {
+    padding: 16px 20px 0;
+    display: flex; justify-content: space-between; align-items: center;
 }
-.card-header h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    letter-spacing: -0.2px;
+.card-h h3 { font-size: 14px; font-weight: 600; color: var(--text); }
+.card-h .tag {
+    font-size: 11px; color: var(--text3); background: var(--border-light);
+    padding: 2px 10px; border-radius: 4px;
 }
-.card-header .tag {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    background: var(--border-light);
-    padding: 3px 10px;
-    border-radius: 4px;
-    font-weight: 500;
-}
-.card-body {
-    padding: 14px 22px 22px;
-}
-.card-body .chart-wrap {
-    height: 300px;
-}
+.card-b { padding: 12px 20px 20px; }
+.chart-h { height: 260px; }
+.chart-m { height: 220px; }
+.chart-s { height: 180px; }
+
+/* ===== Insight ===== */
 .insight {
-    margin-top: 16px;
-    padding: 16px 18px;
-    background: var(--surface);
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg,#fef9f3,#fff5f5);
     border-radius: 8px;
-    border-left: 3px solid var(--accent-blue);
+    border-left: 3px solid var(--red);
 }
 .insight h4 {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent-blue);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+    font-size: 11px; font-weight: 600; color: var(--red);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 6px;
 }
 .insight p {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.8;
+    font-size: 12.5px; color: var(--text2); line-height: 1.8;
 }
-.insight p strong {
-    color: var(--text-primary);
-    font-weight: 600;
+.insight strong { color: var(--text); font-weight: 600; }
+
+/* ===== Timeline ===== */
+.timeline {
+    position: relative; padding-left: 20px;
 }
-.bottom-row {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
+.timeline::before {
+    content: ''; position: absolute; left: 5px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
 }
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-}
-.data-table thead th {
-    text-align: left;
-    padding: 10px 16px;
-    font-weight: 600;
-    font-size: 11px;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-}
-.data-table tbody td {
-    padding: 12px 16px;
+.tl-item {
+    position: relative; padding: 10px 0 10px 20px;
     border-bottom: 1px solid var(--border-light);
-    color: var(--text-secondary);
-    font-weight: 400;
 }
-.data-table tbody tr:last-child td { border-bottom: none; }
-.data-table tbody tr:hover td { background: var(--surface); }
-.data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
-.data-table .up { color: var(--accent-green); font-weight: 600; }
-.data-table .down { color: var(--accent-red); font-weight: 600; }
-.data-table .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 500;
+.tl-item:last-child { border-bottom: none; }
+.tl-dot {
+    position: absolute; left: -18px; top: 14px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--card); border: 2px solid var(--red);
 }
-.badge-green { background: #ecfdf5; color: var(--accent-green); }
-.badge-red { background: #fef2f2; color: var(--accent-red); }
-.badge-amber { background: #fffbeb; color: var(--accent-amber); }
+.tl-date { font-size: 11px; color: var(--text3); font-weight: 500; }
+.tl-text { font-size: 12.5px; color: var(--text2); margin-top: 2px; }
+
+/* ===== Table ===== */
+.tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.tbl th {
+    text-align: left; padding: 10px 14px;
+    font-weight: 600; font-size: 11px; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border); background: var(--border-light);
+}
+.tbl td { padding: 11px 14px; border-bottom: 1px solid var(--border-light); color: var(--text2); }
+.tbl tr:hover td { background: var(--border-light); }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+.badge-g { background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.badge-r { background: #fef2f2; color: var(--red); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.badge-y { background: #fffbeb; color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+
+/* ===== Footer ===== */
 .footer {
-    margin-top: 32px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border-light);
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--text-tertiary);
+    margin-top: 28px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between;
+    font-size: 11.5px; color: var(--text3);
 }
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.kpi-card { animation: fadeInUp 0.6s ease both; }
+.kpi-card:nth-child(1) { animation-delay: 0.05s; }
+.kpi-card:nth-child(2) { animation-delay: 0.1s; }
+.kpi-card:nth-child(3) { animation-delay: 0.15s; }
+.kpi-card:nth-child(4) { animation-delay: 0.2s; }
+.kpi-card:nth-child(5) { animation-delay: 0.25s; }
+.card { animation: fadeInUp 0.7s ease both; }
+
 @media (max-width: 1400px) {
-    .main-grid { grid-template-columns: 1fr 1fr; }
-    .bottom-row { grid-template-columns: 1fr 1fr; }
-    .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .grid-4 { grid-template-columns: repeat(2,1fr); }
+    .kpi-row { grid-template-columns: repeat(3,1fr); }
 }
 @media (max-width: 1024px) {
-    .db-shell { padding: 20px; }
-    .main-grid { grid-template-columns: 1fr; }
-    .bottom-row { grid-template-columns: 1fr; }
-    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
-    .top-bar { flex-direction: column; gap: 12px; }
-    .meta-info { text-align: left; }
+    .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: repeat(2,1fr); }
+    .db { padding: 0 16px 30px; }
+    .header { margin: 0 -16px 24px; padding: 20px 16px 18px; }
 }
 </style>
 </head>
 <body>
-<div class="db-shell">
-<div class="top-bar">
-    <div class="brand">
-        <div class="brand-mark">R</div>
-        <div class="brand-text">
-            <h1>产业经济研究数据中心</h1>
-            <p>Industrial Economy Research Data Center</p>
+<div class="db">
+
+<!-- Header -->
+<div class="header">
+    <div class="header-top">
+        <div class="brand">
+            <div class="brand-icon">研</div>
+            <div class="brand-text">
+                <h1>产业经济研究数据中心</h1>
+                <p>INDUSTRIAL ECONOMY RESEARCH DATA CENTER</p>
+            </div>
         </div>
-    </div>
-    <div class="meta-info">
-        <div class="date">2026年第二季度 · 数据截至 7月15日</div>
-        <div class="status"><span class="status-dot"></span> 系统运行正常</div>
-    </div>
-</div>
-<div class="kpi-strip">
-    <div class="kpi-tile">
-        <div class="k-label">国内生产总值 GDP</div>
-        <div class="k-value">128.4<span style="font-size:16px;color:var(--text-tertiary);font-weight:500;">万亿</span></div>
-        <div class="k-sub"><span class="change up">▲ 5.2%</span><span class="period">同比</span></div>
-    </div>
-    <div class="kpi-tile">
-        <div class="k-label">居民消费指数 CPI</div>
-        <div class="k-value">101.8</div>
-        <div class="k-sub"><span class="change down">▼ 0.6pp</span><span class="period">较上月</span></div>
-    </div>
-    <div class="kpi-tile">
-        <div class="k-label">工业增加值</div>
-        <div class="k-value">+6.1<span style="font-size:16px;color:var(--text-tertiary);font-weight:500;">%</span></div>
-        <div class="k-sub"><span class="change up">▲ 0.3pp</span><span class="period">增速回升</span></div>
-    </div>
-    <div class="kpi-tile">
-        <div class="k-label">社零总额</div>
-        <div class="k-value">47.2<span style="font-size:16px;color:var(--text-tertiary);font-weight:500;">万亿</span></div>
-        <div class="k-sub"><span class="change up">▲ 4.8%</span><span class="period">同比</span></div>
-    </div>
-    <div class="kpi-tile">
-        <div class="k-label">固定资产投资</div>
-        <div class="k-value">+3.9<span style="font-size:16px;color:var(--text-tertiary);font-weight:500;">%</span></div>
-        <div class="k-sub"><span class="change down">▼ 0.5pp</span><span class="period">增速放缓</span></div>
-    </div>
-</div>
-<div class="section-title">核心指标分析</div>
-<div class="main-grid">
-    <div class="card">
-        <div class="card-header"><h3>主要经济指标季度走势</h3><span class="tag">2019Q1 — 2026Q2</span></div>
-        <div class="card-body">
-            <div class="chart-wrap" id="trendChart"></div>
-            <div class="insight"><h4>核心观察</h4><p>2026年二季度GDP同比增速稳定在<strong>5.2%</strong>，延续温和复苏态势。消费对经济增长贡献率回升至<strong>62.4%</strong>，制造业PMI连续6个月处于扩张区间。</p></div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header"><h3>三次产业结构</h3><span class="tag">2026Q2</span></div>
-        <div class="card-body">
-            <div class="chart-wrap" id="pieChart"></div>
-            <div class="insight"><h4>结构优化</h4><p>第三产业占比提升至<strong>57.0%</strong>，服务业持续扩张。高技术制造业增加值同比增长<strong>9.8%</strong>，显著高于整体工业增速。</p></div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header"><h3>经济景气度多维评估</h3><span class="tag">综合评分</span></div>
-        <div class="card-body">
-            <div class="chart-wrap" id="radarChart"></div>
-            <div class="insight"><h4>景气扫描</h4><p>生产景气与价格稳定两项指标表现突出，投资意愿相对偏弱。与上季度相比，<strong>出口动能</strong>和<strong>消费活力</strong>均有改善。</p></div>
+        <div class="header-meta">
+            <div class="date">2026年第二季度 · 数据截至 7月15日</div>
+            <div class="badge"><span class="dot"></span> 系统运行正常</div>
         </div>
     </div>
 </div>
-<div class="section-title">行业与区域监测</div>
-<div class="bottom-row">
+
+<!-- KPI -->
+<div class="kpi-row">
+    <div class="kpi-card">
+        <div class="kpi-label">国内生产总值 GDP</div>
+        <div class="kpi-value">128.4<span class="kpi-unit">万亿</span></div>
+        <div class="kpi-sub"><span class="chg chg-up">▲ 5.2%</span><span style="color:var(--text3)">同比增长</span></div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">居民消费价格指数 CPI</div>
+        <div class="kpi-value">101.8</div>
+        <div class="kpi-sub"><span class="chg chg-down">▼ 0.6pp</span><span style="color:var(--text3)">较上月回落</span></div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">规模以上工业增加值</div>
+        <div class="kpi-value">+6.1<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub"><span class="chg chg-up">▲ 0.3pp</span><span style="color:var(--text3)">增速回升</span></div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">社会消费品零售总额</div>
+        <div class="kpi-value">47.2<span class="kpi-unit">万亿</span></div>
+        <div class="kpi-sub"><span class="chg chg-up">▲ 4.8%</span><span style="color:var(--text3)">同比增长</span></div>
+    </div>
+    <div class="kpi-card">
+        <div class="kpi-label">固定资产投资完成额</div>
+        <div class="kpi-value">+3.9<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub"><span class="chg chg-down">▼ 0.5pp</span><span style="color:var(--text3)">增速放缓</span></div>
+    </div>
+</div>
+
+<!-- Section 1 -->
+<div class="sec-title">宏观经济运行监测</div>
+<div class="grid-3">
     <div class="card">
-        <div class="card-header"><h3>重点行业月度景气热力图</h3><span class="tag">2026年上半年</span></div>
-        <div class="card-body">
-            <div class="chart-wrap" id="heatmapChart"></div>
-            <div class="insight"><h4>行业分化</h4><p>新能源汽车与半导体设备持续处于高位，传统房地产和建材行业承压明显。<strong>高技术制造业</strong>引领增长格局。</p></div>
-        </div>
+        <div class="card-h"><h3>主要经济指标季度走势</h3><span class="tag">2019Q1 — 2026Q2</span></div>
+        <div class="card-b"><div class="chart-h" id="trendChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-header"><h3>区域经济增速对比</h3><span class="tag">2026Q2</span></div>
-        <div class="card-body"><div class="chart-wrap" id="regionChart"></div></div>
+        <div class="card-h"><h3>GDP增量分解（瀑布图）</h3><span class="tag">2026Q2</span></div>
+        <div class="card-b"><div class="chart-h" id="waterfallChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-header"><h3>政策工具箱跟踪</h3><span class="tag">实时</span></div>
-        <div class="card-body" style="padding:0;">
-            <table class="data-table">
-                <thead><tr><th>政策工具</th><th>当前值</th><th>方向</th></tr></thead>
+        <div class="card-h"><h3>经济景气度多维评估</h3><span class="tag">综合评分</span></div>
+        <div class="card-b"><div class="chart-h" id="radarChart"></div></div>
+    </div>
+</div>
+
+<!-- Insight -->
+<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;">
+    <div style="font-size:12px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📊 核心观察</div>
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.85;">
+        2026年二季度GDP同比增速稳定在<strong style="color:var(--text)">5.2%</strong>，延续温和复苏态势。消费对经济增长贡献率回升至<strong>62.4%</strong>，成为拉动经济的首要动力。
+        制造业PMI连续6个月处于扩张区间，高技术制造业增加值同比增长<strong>9.8%</strong>，显著高于整体工业增速。
+        <strong style="color:var(--red)">值得关注的是</strong>，投资端受房地产拖累仍然偏弱，基建投资成为稳投资的主要支撑。
+    </p>
+</div>
+
+<!-- Section 2 -->
+<div class="sec-title">产业结构与资金流向</div>
+<div class="grid-3">
+    <div class="card">
+        <div class="card-h"><h3>三次产业结构演变</h3><span class="tag">面积图</span></div>
+        <div class="card-b"><div class="chart-h" id="areaChart"></div></div>
+    </div>
+    <div class="card">
+        <div class="card-h"><h3>产业资金流向桑基图</h3><span class="tag">2026H1</span></div>
+        <div class="card-b"><div class="chart-h" id="sankeyChart"></div></div>
+    </div>
+    <div class="card">
+        <div class="card-h"><h3>季度GDP结构玫瑰图</h3><span class="tag">2026Q2</span></div>
+        <div class="card-b"><div class="chart-h" id="roseChart"></div></div>
+    </div>
+</div>
+
+<!-- Section 3 -->
+<div class="sec-title">行业景气与区域格局</div>
+<div class="grid-2">
+    <div class="card">
+        <div class="card-h"><h3>重点行业月度景气热力图</h3><span class="tag">2026年上半年</span></div>
+        <div class="card-b"><div class="chart-h" id="heatmapChart"></div></div>
+    </div>
+    <div class="card">
+        <div class="card-h"><h3>区域经济增速与目标达成</h3><span class="tag">仪表盘</span></div>
+        <div class="card-b"><div class="chart-h" id="gaugeChart"></div></div>
+    </div>
+</div>
+
+<!-- Section 4 -->
+<div class="sec-title">政策跟踪与大事记</div>
+<div class="grid-2">
+    <div class="card">
+        <div class="card-h"><h3>宏观政策工具箱跟踪</h3><span class="tag">实时</span></div>
+        <div class="card-b" style="padding:0;">
+            <table class="tbl">
+                <thead><tr><th>政策工具</th><th>当前值</th><th>上次调整</th><th>趋势</th><th>政策取向</th></tr></thead>
                 <tbody>
-                    <tr><td>存款准备金率</td><td class="num">7.0%</td><td><span class="badge badge-green">宽松</span></td></tr>
-                    <tr><td>一年期LPR</td><td class="num">3.15%</td><td><span class="badge badge-green">下调</span></td></tr>
-                    <tr><td>财政赤字率</td><td class="num">3.2%</td><td><span class="badge badge-amber">积极</span></td></tr>
-                    <tr><td>基建投资增速</td><td class="num">+5.8%</td><td><span class="badge badge-green">加速</span></td></tr>
-                    <tr><td>房地产限购</td><td class="num">局部放开</td><td><span class="badge badge-amber">松绑</span></td></tr>
+                    <tr><td>存款准备金率</td><td class="num">7.0%</td><td class="num">2026-03-15</td><td><span class="badge-g">↓ 下调</span></td><td>宽松</td></tr>
+                    <tr><td>一年期LPR</td><td class="num">3.15%</td><td class="num">2026-04-20</td><td><span class="badge-g">↓ 下调</span></td><td>宽松</td></tr>
+                    <tr><td>财政赤字率</td><td class="num">3.2%</td><td class="num">2026-01-01</td><td><span class="badge-y">→ 持平</span></td><td>积极</td></tr>
+                    <tr><td>基建投资增速</td><td class="num">+5.8%</td><td class="num">2026-06-30</td><td><span class="badge-g">↑ 加速</span></td><td>扩张</td></tr>
+                    <tr><td>房地产限购</td><td class="num">局部放开</td><td class="num">2026-05-10</td><td><span class="badge-r">↗ 松绑</span></td><td>调整</td></tr>
+                    <tr><td>人民币汇率</td><td class="num">7.18</td><td class="num">2026-07-14</td><td><span class="badge-y">→ 稳定</span></td><td>中性</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="card">
+        <div class="card-h"><h3>近期政策大事记</h3><span class="tag">时间轴</span></div>
+        <div class="card-b">
+            <div class="timeline">
+                <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2026-07-10</div><div class="tl-text">央行下调存款准备金率0.25个百分点，释放流动性约5000亿元</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-06-28</div><div class="tl-text">国务院发布《推动大规模设备更新和消费品以旧换新行动方案》</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2026-06-15</div><div class="tl-text">统计局发布5月经济数据：工业增速超预期，消费稳步回升</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-05-20</div><div class="tl-text">发改委明确2026年专项债发行额度3.9万亿元</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-05-08</div><div class="tl-text">住建部：在15个城市开展房地产发展新模式试点</div></div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="footer"><div>数据来源：国家统计局 · 中国人民银行 · 海关总署 · wind</div><div>产业经济研究中心 · 数据更新频率：月度</div></div>
+
+<!-- Footer -->
+<div class="footer">
+    <div>数据来源：国家统计局 · 中国人民银行 · 海关总署 · 国务院发展研究中心 · wind</div>
+    <div>产业经济研究中心 · 报告生成时间：2026-07-15 09:51 · 更新频率：月度</div>
 </div>
+
+</div>
+
 <script>
-const cMain='#0f172a',cSub='#475569',cLight='#94a3b8',cBorder='#e2e8f0',cAccent='#2563eb',cGreen='#059669',cRed='#dc2626';
-const trendChart=echarts.init(document.getElementById('trendChart'));
-trendChart.setOption({
-    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:cBorder,borderWidth:1,textStyle:{color:cMain,fontSize:12},padding:[10,14],axisPointer:{type:'cross',lineStyle:{color:'#cbd5e1',type:'dashed'}}},
-    legend:{data:['GDP增速','固定资产投资','社零增速'],top:0,right:0,textStyle:{color:cSub,fontSize:11},itemWidth:10,itemHeight:10},
+const navy='#1a3a5c', navyL='#2d5a8a', red='#b91c3a', redL='#dc3545', gold='#c9a227';
+const text='#1a1a2e', text2='#4a4a5a', text3='#8a8a9a', border='#e2e4e8';
+
+// 1. 趋势图
+const tc=echarts.init(document.getElementById('trendChart'));
+tc.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
+    legend:{data:['GDP增速','固定资产投资','社零增速'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
     grid:{left:45,right:30,top:32,bottom:28},
-    xAxis:{type:'category',data:['19Q1','19Q2','19Q3','19Q4','20Q1','20Q2','20Q3','20Q4','21Q1','21Q2','21Q3','21Q4','22Q1','22Q2','22Q3','22Q4','23Q1','23Q2','23Q3','23Q4','24Q1','24Q2','24Q3','24Q4','25Q1','25Q2','25Q3','25Q4','26Q1','26Q2'],axisLine:{lineStyle:{color:cBorder}},axisTick:{show:false},axisLabel:{color:cLight,fontSize:10,interval:3}},
-    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f1f5f9',type:[4,4]}},axisLabel:{color:cLight,fontSize:11,formatter:'{value}%'}},
+    xAxis:{type:'category',data:['19Q1','19Q2','19Q3','19Q4','20Q1','20Q2','20Q3','20Q4','21Q1','21Q2','21Q3','21Q4','22Q1','22Q2','22Q3','22Q4','23Q1','23Q2','23Q3','23Q4','24Q1','24Q2','24Q3','24Q4','25Q1','25Q2','25Q3','25Q4','26Q1','26Q2'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:10,interval:3}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
     series:[
-        {name:'GDP增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:4,lineStyle:{color:cMain,width:2.2},itemStyle:{color:cMain},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(15,23,42,0.06)'},{offset:1,color:'rgba(15,23,42,0)'}])},data:[6.4,6.0,5.8,5.8,-6.8,3.2,4.9,6.5,18.3,7.9,4.9,4.0,4.8,0.4,3.9,2.9,4.5,6.3,4.9,5.2,5.3,4.7,4.6,5.2,5.1,4.9,5.0,5.3,5.1,5.2]},
-        {name:'固定资产投资',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:cAccent,width:1.8},itemStyle:{color:cAccent},data:[6.3,5.8,5.4,5.4,-16.1,-3.1,0.8,2.9,25.6,12.6,7.3,4.9,9.3,6.1,5.9,5.1,5.1,3.8,3.1,3.0,4.5,3.9,3.4,3.2,4.2,3.9,3.6,3.5,4.4,3.9]},
-        {name:'社零增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:cGreen,width:1.8},itemStyle:{color:cGreen},data:[8.3,9.8,7.8,8.0,-19.0,-3.9,0.5,4.6,33.9,12.1,4.4,1.7,3.3,-0.7,0.7,-1.8,5.8,8.2,5.5,7.4,4.7,3.7,4.8,3.7,5.6,4.8,5.2,4.6,5.0,4.8]}
+        {name:'GDP增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:4,lineStyle:{color:navy,width:2.5},itemStyle:{color:navy},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(26,58,92,0.08)'},{offset:1,color:'rgba(26,58,92,0)'}])},data:[6.4,6.0,5.8,5.8,-6.8,3.2,4.9,6.5,18.3,7.9,4.9,4.0,4.8,0.4,3.9,2.9,4.5,6.3,4.9,5.2,5.3,4.7,4.6,5.2,5.1,4.9,5.0,5.3,5.1,5.2]},
+        {name:'固定资产投资',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:red,width:1.8},itemStyle:{color:red},data:[6.3,5.8,5.4,5.4,-16.1,-3.1,0.8,2.9,25.6,12.6,7.3,4.9,9.3,6.1,5.9,5.1,5.1,3.8,3.1,3.0,4.5,3.9,3.4,3.2,4.2,3.9,3.6,3.5,4.4,3.9]},
+        {name:'社零增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:gold,width:1.8},itemStyle:{color:gold},data:[8.3,9.8,7.8,8.0,-19.0,-3.9,0.5,4.6,33.9,12.1,4.4,1.7,3.3,-0.7,0.7,-1.8,5.8,8.2,5.5,7.4,4.7,3.7,4.8,3.7,5.6,4.8,5.2,4.6,5.0,4.8]}
     ]
 });
-const pieChart=echarts.init(document.getElementById('pieChart'));
-pieChart.setOption({
-    tooltip:{trigger:'item',formatter:'{b}: {d}%'},
-    legend:{bottom:0,textStyle:{color:cSub,fontSize:11},itemWidth:10,itemHeight:10},
-    series:[{type:'pie',radius:['42%','70%'],center:['50%','45%'],avoidLabelOverlap:true,itemStyle:{borderRadius:5,borderColor:'#fff',borderWidth:3},label:{show:true,color:cSub,fontSize:12,formatter:'{b}\n{d}%'},labelLine:{length:8,length2:6,lineStyle:{color:cBorder}},data:[{value:6.8,name:'第一产业',itemStyle:{color:'#94a3b8'}},{value:36.2,name:'第二产业',itemStyle:{color:cMain}},{value:57.0,name:'第三产业',itemStyle:{color:'#64748b'}}]}]
+
+// 2. 瀑布图
+const wc=echarts.init(document.getElementById('waterfallChart'));
+wc.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:p=>{let s=p[0].name+': ';if(p[0].value>=0)s+='+'+p[0].value;else s+=p[0].value;return s+'个百分点';}},
+    grid:{left:50,right:20,top:10,bottom:20},
+    xAxis:{type:'category',data:['2025Q2\n基期','消费','投资','净出口','政府支出','库存变动','其他','2026Q2\n当期'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text2,fontSize:10}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
+    series:[{
+        type:'bar',barWidth:28,stack:'total',
+        itemStyle:{borderColor:'transparent',color:'transparent'},
+        emphasis:{itemStyle:{borderColor:'transparent',color:'transparent'}},
+        data:[0,4.9,8.9,11.5,13.2,13.5,13.8,0]
+    },{
+        type:'bar',barWidth:28,stack:'total',
+        itemStyle:{borderRadius:[3,3,0,0]},
+        data:[
+            {value:4.9,itemStyle:{color:navyL}},
+            {value:4.0,itemStyle:{color:'#059669'}},
+            {value:2.6,itemStyle:{color:gold}},
+            {value:1.7,itemStyle:{color:'#7c3aed'}},
+            {value:0.3,itemStyle:{color:text3}},
+            {value:0.3,itemStyle:{color:'#f59e0b'}},
+            {value:-8.6,itemStyle:{color:red}},
+            {value:5.2,itemStyle:{color:navy}}
+        ]
+    }]
 });
-const radarChart=echarts.init(document.getElementById('radarChart'));
-radarChart.setOption({
+
+// 3. 雷达图
+const rc=echarts.init(document.getElementById('radarChart'));
+rc.setOption({
     radar:{
         indicator:[{name:'生产景气',max:100},{name:'消费活力',max:100},{name:'投资意愿',max:100},{name:'出口动能',max:100},{name:'价格稳定',max:100},{name:'就业水平',max:100}],
-        shape:'polygon',splitNumber:4,axisName:{color:cSub,fontSize:11},splitLine:{lineStyle:{color:'#f1f5f9'}},splitArea:{show:true,areaStyle:{color:['#fff','#f8fafc']}},axisLine:{lineStyle:{color:'#f1f5f9'}}
+        shape:'polygon',splitNumber:4,axisName:{color:text2,fontSize:11},splitLine:{lineStyle:{color:'#f0f1f4'}},splitArea:{show:true,areaStyle:{color:['#fff','#fafbfc']}},axisLine:{lineStyle:{color:'#f0f1f4'}}
     },
-    series:[{type:'radar',data:[{value:[78,68,52,74,82,70],name:'当前季度',itemStyle:{color:cMain},areaStyle:{color:'rgba(15,23,42,0.08)'},lineStyle:{width:2}},{value:[72,62,55,68,78,65],name:'上季度',itemStyle:{color:cLight},lineStyle:{width:1.5,type:'dashed'},symbol:'none'}]}]
+    series:[{type:'radar',data:[{value:[78,68,52,74,82,70],name:'当前季度',itemStyle:{color:navy},areaStyle:{color:'rgba(26,58,92,0.1)'},lineStyle:{width:2}},{value:[72,62,55,68,78,65],name:'上季度',itemStyle:{color:text3},lineStyle:{width:1.5,type:'dashed'},symbol:'none'}]}]
 });
-const heatmapChart=echarts.init(document.getElementById('heatmapChart'));
-const months=['1月','2月','3月','4月','5月','6月'];
-const industries=['新能源汽车','半导体设备','光伏制造','生物医药','高端装备','消费电子','钢铁冶金','建筑材料','房地产','传统汽车'];
-const heatData=[[0,0,92],[1,0,88],[2,0,95],[3,0,91],[4,0,94],[5,0,90],[0,1,85],[1,1,82],[2,1,88],[3,1,86],[4,1,89],[5,1,87],[0,2,78],[1,2,75],[2,2,80],[3,2,82],[4,2,79],[5,2,77],[0,3,72],[1,3,74],[2,3,76],[3,3,79],[4,3,81],[5,3,83],[0,4,68],[1,4,70],[2,4,73],[3,4,75],[4,4,72],[5,4,74],[0,5,65],[1,5,62],[2,5,68],[3,5,70],[4,5,66],[5,5,64],[0,6,45],[1,6,42],[2,6,48],[3,6,44],[4,6,46],[5,6,43],[0,7,38],[1,7,35],[2,7,40],[3,7,37],[4,7,39],[5,7,36],[0,8,32],[1,8,30],[2,8,33],[3,8,31],[4,8,29],[5,8,30],[0,9,55],[1,9,52],[2,9,58],[3,9,54],[4,9,56],[5,9,53]];
-heatmapChart.setOption({
-    tooltip:{position:'top',formatter:p=>industries[p.value[1]]+' '+months[p.value[0]]+'：景气 '+p.value[2]},
+
+// 4. 面积图
+const ac=echarts.init(document.getElementById('areaChart'));
+ac.setOption({
+    tooltip:{trigger:'axis'},
+    legend:{data:['第一产业','第二产业','第三产业'],top:0,right:0,textStyle:{color:text2,fontSize:10},itemWidth:10,itemHeight:10},
+    grid:{left:40,right:20,top:28,bottom:20},
+    xAxis:{type:'category',data:['2020','2021','2022','2023','2024','2025','2026'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4'}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
+    series:[
+        {name:'第一产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:'#cbd5e1'},data:[7.7,7.3,7.3,7.1,7.0,6.9,6.8]},
+        {name:'第二产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:navyL},data:[37.8,39.4,39.9,39.1,38.5,37.8,36.2]},
+        {name:'第三产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:'rgba(185,28,58,0.2)'},data:[54.5,53.3,52.8,53.8,54.5,55.3,57.0]}
+    ]
+});
+
+// 5. 桑基图
+const sc=echarts.init(document.getElementById('sankeyChart'));
+sc.setOption({
+    tooltip:{trigger:'item'},
+    series:[{
+        type:'sankey',layout:'none',emphasis:{focus:'adjacency'},
+        data:[{name:'制造业'},{name:'服务业'},{name:'农业'},{name:'建筑业'},{name:'金融业'},{name:'信息技术'},{name:'房地产'},{name:'消费'},{name:'出口'},{name:'政府'},{name:'投资'}],
+        links:[
+            {source:'制造业',target:'消费',value:35},{source:'制造业',target:'出口',value:28},{source:'制造业',target:'投资',value:15},
+            {source:'服务业',target:'消费',value:42},{source:'服务业',target:'政府',value:12},
+            {source:'金融业',target:'投资',value:18},{source:'金融业',target:'消费',value:8},
+            {source:'信息技术',target:'消费',value:15},{source:'信息技术',target:'出口',value:12},
+            {source:'建筑业',target:'投资',value:22},{source:'建筑业',target:'政府',value:8},
+            {source:'农业',target:'消费',value:10},{source:'房地产',target:'投资',value:14},{source:'房地产',target:'消费',value:6}
+        ],
+        lineStyle:{color:'gradient',curveness:0.5,opacity:0.4},
+        itemStyle:{borderWidth:0},
+        label:{color:text2,fontSize:10}
+    }]
+});
+
+// 6. 玫瑰图
+const roc=echarts.init(document.getElementById('roseChart'));
+roc.setOption({
+    tooltip:{trigger:'item',formatter:'{b}: {c}万亿 ({d}%)'},
+    series:[{
+        type:'pie',radius:[20,90],center:['50%','55%'],roseType:'area',
+        itemStyle:{borderRadius:5,borderColor:'#fff',borderWidth:2},
+        label:{color:text2,fontSize:11,formatter:'{b}\n{d}%'},
+        data:[
+            {value:8.8,name:'农林牧渔',itemStyle:{color:'#94a3b8'}},
+            {value:32.5,name:'工业制造',itemStyle:{color:navy}},
+            {value:18.2,name:'建筑业',itemStyle:{color:navyL}},
+            {value:45.6,name:'批发零售',itemStyle:{color:'#7c3aed'}},
+            {value:12.3,name:'交运仓储',itemStyle:{color:gold}},
+            {value:8.5,name:'住宿餐饮',itemStyle:{color:redL}},
+            {value:28.4,name:'金融保险',itemStyle:{color:red}},
+            {value:22.1,name:'信息技术',itemStyle:{color:'#059669'}},
+            {value:15.8,name:'房地产',itemStyle:{color:text3}}
+        ]
+    }]
+});
+
+// 7. 热力图
+const hc=echarts.init(document.getElementById('heatmapChart'));
+const ms=['1月','2月','3月','4月','5月','6月'];
+const inds=['新能源汽车','半导体设备','光伏制造','生物医药','高端装备','消费电子','钢铁冶金','建筑材料','房地产','传统汽车'];
+const hd=[[0,0,92],[1,0,88],[2,0,95],[3,0,91],[4,0,94],[5,0,90],[0,1,85],[1,1,82],[2,1,88],[3,1,86],[4,1,89],[5,1,87],[0,2,78],[1,2,75],[2,2,80],[3,2,82],[4,2,79],[5,2,77],[0,3,72],[1,3,74],[2,3,76],[3,3,79],[4,3,81],[5,3,83],[0,4,68],[1,4,70],[2,4,73],[3,4,75],[4,4,72],[5,4,74],[0,5,65],[1,5,62],[2,5,68],[3,5,70],[4,5,66],[5,5,64],[0,6,45],[1,6,42],[2,6,48],[3,6,44],[4,6,46],[5,6,43],[0,7,38],[1,7,35],[2,7,40],[3,7,37],[4,7,39],[5,7,36],[0,8,32],[1,8,30],[2,8,33],[3,8,31],[4,8,29],[5,8,30],[0,9,55],[1,9,52],[2,9,58],[3,9,54],[4,9,56],[5,9,53]];
+hc.setOption({
+    tooltip:{position:'top',formatter:p=>inds[p.value[1]]+' '+ms[p.value[0]]+'：景气 '+p.value[2]},
     grid:{left:88,right:16,top:8,bottom:40},
-    xAxis:{type:'category',data:months,axisLine:{lineStyle:{color:cBorder}},axisTick:{show:false},axisLabel:{color:cSub,fontSize:11}},
-    yAxis:{type:'category',data:industries,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:cSub,fontSize:10}},
-    visualMap:{min:25,max:100,calculable:false,orient:'horizontal',left:'center',bottom:0,itemWidth:120,itemHeight:10,textStyle:{color:cLight,fontSize:10},inRange:{color:['#f1f5f9','#cbd5e1','#64748b','#334155','#0f172a']}},
-    series:[{type:'heatmap',data:heatData,label:{show:false},itemStyle:{borderColor:'#fff',borderWidth:1,borderRadius:2}}]
+    xAxis:{type:'category',data:ms,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text2,fontSize:11}},
+    yAxis:{type:'category',data:inds,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:text2,fontSize:10}},
+    visualMap:{min:25,max:100,calculable:false,orient:'horizontal',left:'center',bottom:0,itemWidth:120,itemHeight:10,textStyle:{color:text3,fontSize:10},inRange:{color:['#f0f1f4','#cbd5e1','#64748b','#334155',navy]}},
+    series:[{type:'heatmap',data:hd,label:{show:false},itemStyle:{borderColor:'#fff',borderWidth:1,borderRadius:2}}]
 });
-const regionChart=echarts.init(document.getElementById('regionChart'));
-regionChart.setOption({
-    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-    grid:{left:45,right:20,top:10,bottom:20},
-    xAxis:{type:'category',data:['东部','中部','西部','东北'],axisLine:{lineStyle:{color:cBorder}},axisTick:{show:false},axisLabel:{color:cSub,fontSize:12}},
-    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f1f5f9',type:[4,4]}},axisLabel:{color:cLight,fontSize:11,formatter:'{value}%'}},
-    series:[{type:'bar',barWidth:28,itemStyle:{borderRadius:[4,4,0,0],color:p=>['#0f172a','#334155','#64748b','#94a3b8'][p.dataIndex]},data:[5.8,5.3,5.1,3.6]}]
+
+// 8. 仪表盘
+const gc=echarts.init(document.getElementById('gaugeChart'));
+gc.setOption({
+    series:[
+        {type:'gauge',center:['25%','55%'],radius:'70%',min:0,max:8,startAngle:210,endAngle:-30,
+         progress:{show:true,width:14,itemStyle:{color:navy}},
+         axisLine:{lineStyle:{width:14,color:[[1,'#f0f1f4']]}},
+         axisTick:{show:false},splitLine:{length:8,lineStyle:{width:1,color:'#e2e4e8'}},axisLabel:{distance:18,color:text3,fontSize:9,formatter:'{value}'},
+         pointer:{icon:'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',length:'60%',width:5,offsetCenter:[0,'-10%'],itemStyle:{color:navy}},
+         detail:{valueAnimation:true,formatter:'{value}%',color:navy,fontSize:22,fontWeight:'bold',offsetCenter:[0,'30%']},
+         title:{offsetCenter:[0,'65%'],fontSize:11,color:text2},
+         data:[{value:5.2,name:'GDP增速'}]},
+        {type:'gauge',center:['50%','55%'],radius:'70%',min:0,max:8,startAngle:210,endAngle:-30,
+         progress:{show:true,width:14,itemStyle:{color:red}},
+         axisLine:{lineStyle:{width:14,color:[[1,'#f0f1f4']]}},
+         axisTick:{show:false},splitLine:{length:8,lineStyle:{width:1,color:'#e2e4e8'}},axisLabel:{distance:18,color:text3,fontSize:9},
+         pointer:{icon:'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',length:'60%',width:5,offsetCenter:[0,'-10%'],itemStyle:{color:red}},
+         detail:{valueAnimation:true,formatter:'{value}%',color:red,fontSize:22,fontWeight:'bold',offsetCenter:[0,'30%']},
+         title:{offsetCenter:[0,'65%'],fontSize:11,color:text2},
+         data:[{value:6.1,name:'工业增加值'}]},
+        {type:'gauge',center:['75%','55%'],radius:'70%',min:0,max:8,startAngle:210,endAngle:-30,
+         progress:{show:true,width:14,itemStyle:{color:gold}},
+         axisLine:{lineStyle:{width:14,color:[[1,'#f0f1f4']]}},
+         axisTick:{show:false},splitLine:{length:8,lineStyle:{width:1,color:'#e2e4e8'}},axisLabel:{distance:18,color:text3,fontSize:9},
+         pointer:{icon:'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',length:'60%',width:5,offsetCenter:[0,'-10%'],itemStyle:{color:gold}},
+         detail:{valueAnimation:true,formatter:'{value}%',color:gold,fontSize:22,fontWeight:'bold',offsetCenter:[0,'30%']},
+         title:{offsetCenter:[0,'65%'],fontSize:11,color:text2},
+         data:[{value:4.8,name:'社零增速'}]}
+    ]
 });
-window.addEventListener('resize',()=>{trendChart.resize();pieChart.resize();radarChart.resize();heatmapChart.resize();regionChart.resize();});
+
+window.addEventListener('resize',()=>{tc.resize();wc.resize();rc.resize();ac.resize();sc.resize();roc.resize();hc.resize();gc.resize();});
 </script>
 </body>
 </html>
