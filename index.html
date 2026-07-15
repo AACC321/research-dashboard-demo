@@ -199,7 +199,68 @@ body {
     background: var(--card); border: 2px solid var(--red);
 }
 .tl-date { font-size: 11px; color: var(--text3); font-weight: 500; }
-.tl-text { font-size: 12.5px; color: var(--text2); margin-top: 2px; }
+.tl-text { font-size: 12.5px; color: var(--text2); margin-top: 2px; line-height: 1.5; }
+.tl-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tl-tag {
+    font-size: 10px; padding: 2px 7px; border-radius: 3px;
+    font-weight: 500; letter-spacing: 0.3px;
+}
+.tl-tag.tag-macro { background: #e0f2fe; color: #0369a1; }
+.tl-tag.tag-industry { background: #fef3c7; color: #92400e; }
+.tl-tag.tag-reform { background: #fce7f3; color: #be185d; }
+.tl-tag.tag-finance { background: #dcfce7; color: #15803d; }
+.tl-tag.tag-estate { background: #f3e8ff; color: #7c3aed; }
+.tl-tag.tag-digital { background: #dbeafe; color: #1d4ed8; }
+.tl-tag.tag-green { background: #ecfdf5; color: #047857; }
+
+/* ===== Policy Sector Grid ===== */
+.policy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.policy-sector {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    transition: all 0.3s ease;
+}
+.policy-sector:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+.sector-header {
+    padding: 12px 16px; font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    color: var(--text);
+}
+.sector-header::before {
+    content: ''; width: 3px; height: 14px; border-radius: 2px;
+}
+.sector-assets::before { background: var(--navy); }
+.sector-park::before { background: var(--gold); }
+.sector-property::before { background: #6b7280; }
+.sector-tech::before { background: #0ea5e9; }
+.sector-count {
+    margin-left: auto; font-size: 10px; color: var(--text3);
+    background: var(--border-light); padding: 1px 7px; border-radius: 10px;
+    font-weight: 500;
+}
+.sector-body { padding: 0 16px 14px; }
+.sector-tl-item {
+    padding: 8px 0; border-bottom: 1px solid var(--border-light);
+}
+.sector-tl-item:last-child { border-bottom: none; }
+.sector-tl-date { font-size: 10px; color: var(--text3); font-weight: 500; }
+.sector-tl-text { font-size: 11.5px; color: var(--text2); margin-top: 1px; line-height: 1.5; }
+.sector-tl-tag {
+    display: inline-block; font-size: 9px; padding: 1px 5px;
+    border-radius: 2px; margin-top: 3px; font-weight: 500;
+}
+
+/* Policy sector summary bar */
+.policy-summary {
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+    border-radius: 10px; padding: 18px 24px; margin-bottom: 16px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.policy-summary-text { color: rgba(255,255,255,0.85); font-size: 12.5px; line-height: 1.6; max-width: 70%; }
+.policy-summary-text strong { color: #fff; }
+.policy-summary-stat { text-align: right; }
+.policy-summary-stat .num { font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
+.policy-summary-stat .lbl { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
 
 /* ===== Table ===== */
 .tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
@@ -241,12 +302,16 @@ body {
     .grid-3 { grid-template-columns: 1fr 1fr; }
     .grid-4 { grid-template-columns: repeat(2,1fr); }
     .kpi-row { grid-template-columns: repeat(3,1fr); }
+    .policy-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 1024px) {
     .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
     .kpi-row { grid-template-columns: repeat(2,1fr); }
     .db { padding: 0 16px 30px; }
     .header { margin: 0 -16px 24px; padding: 20px 16px 18px; }
+    .policy-grid { grid-template-columns: 1fr; }
+    .policy-summary { flex-direction: column; gap: 12px; text-align: center; }
+    .policy-summary-text { max-width: 100%; }
 }
 </style>
 </head>
@@ -379,11 +444,124 @@ body {
         <div class="card-h"><h3>近期政策大事记</h3><span class="tag">时间轴</span></div>
         <div class="card-b">
             <div class="timeline">
-                <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2026-07-10</div><div class="tl-text">央行下调存款准备金率0.25个百分点，释放流动性约5000亿元</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-06-28</div><div class="tl-text">国务院发布《推动大规模设备更新和消费品以旧换新行动方案》</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2026-06-15</div><div class="tl-text">统计局发布5月经济数据：工业增速超预期，消费稳步回升</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-05-20</div><div class="tl-text">发改委明确2026年专项债发行额度3.9万亿元</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-05-08</div><div class="tl-text">住建部：在15个城市开展房地产发展新模式试点</div></div>
+                <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2026-07-10</div><div class="tl-text">央行下调存款准备金率0.25个百分点，释放流动性约5000亿元</div><div class="tl-tags"><span class="tl-tag tag-macro">货币政策</span><span class="tl-tag tag-finance">流动性</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-06-28</div><div class="tl-text">国务院发布《推动大规模设备更新和消费品以旧换新行动方案》</div><div class="tl-tags"><span class="tl-tag tag-industry">产业政策</span><span class="tl-tag tag-reform">扩内需</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2026-06-15</div><div class="tl-text">统计局发布5月经济数据：工业增速超预期，消费稳步回升</div><div class="tl-tags"><span class="tl-tag tag-macro">数据发布</span><span class="tl-tag tag-industry">工业景气</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-05-20</div><div class="tl-text">发改委明确2026年专项债发行额度3.9万亿元</div><div class="tl-tags"><span class="tl-tag tag-finance">财政政策</span><span class="tl-tag tag-industry">基建投资</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-05-08</div><div class="tl-text">住建部：在15个城市开展房地产发展新模式试点</div><div class="tl-tags"><span class="tl-tag tag-estate">房地产</span><span class="tl-tag tag-reform">制度改革</span></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section: 主业关联政策大事记 -->
+<div class="sec-title">主业关联政策大事记</div>
+
+<!-- 政策总览提示条 -->
+<div class="policy-summary">
+    <div class="policy-summary-text">
+        <strong>政策窗口期研判：</strong>国企改革深化提升行动（2024-2028）进入关键年，园区运营与科技领域政策密集出台，资产经营制度持续完善。
+        物业服务行业正经历规范化转型。建议密切关注资产估值新规、零碳园区申报、智慧园区建设等直接关联政策的落地进展。
+    </div>
+    <div class="policy-summary-stat">
+        <div class="num">14</div>
+        <div class="lbl">近2年关联政策</div>
+    </div>
+</div>
+
+<!-- 四栏主业政策 -->
+<div class="policy-grid">
+    <!-- 资产经营 -->
+    <div class="policy-sector">
+        <div class="sector-header sector-assets">资产经营<span class="sector-count">4项</span></div>
+        <div class="sector-body">
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025-08 · 国资委</div>
+                <div class="sector-tl-text">《中央企业违规经营投资责任追究实施办法》</div>
+                <span class="sector-tl-tag" style="background:#e0f2fe;color:#0369a1">风险防控</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025-03 · 国资委</div>
+                <div class="sector-tl-text">《企业国有资产交易操作规则》修订发布</div>
+                <span class="sector-tl-tag" style="background:#dcfce7;color:#15803d">交易规范</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025-01 · 国务院办公厅</div>
+                <div class="sector-tl-text">《促进政府投资基金高质量发展的指导意见》</div>
+                <span class="sector-tl-tag" style="background:#fef3c7;color:#92400e">投资引导</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2024-01 · 国资委</div>
+                <div class="sector-tl-text">《优化央企资产评估管理有关事项的通知》</div>
+                <span class="sector-tl-tag" style="background:#fce7f3;color:#be185d">分类管理</span>
+            </div>
+        </div>
+    </div>
+    <!-- 园区运营 -->
+    <div class="policy-sector">
+        <div class="sector-header sector-park">园区运营<span class="sector-count">4项</span></div>
+        <div class="sector-body">
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025-09 · 工信部/发改委</div>
+                <div class="sector-tl-text">《工业园区高质量发展指引》发布</div>
+                <span class="sector-tl-tag" style="background:#fef3c7;color:#92400e">提质增效</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025-07 · 发改委等三部门</div>
+                <div class="sector-tl-text">《关于开展零碳园区建设的通知》启动申报</div>
+                <span class="sector-tl-tag" style="background:#ecfdf5;color:#047857">零碳转型</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2024-08 · 国务院</div>
+                <div class="sector-tl-text">《公平竞争审查条例》规范招商引资</div>
+                <span class="sector-tl-tag" style="background:#e0f2fe;color:#0369a1">公平竞争</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2024-07 · 国务院</div>
+                <div class="sector-tl-text">《新型城镇化战略五年行动计划》提级扩能</div>
+                <span class="sector-tl-tag" style="background:#f3e8ff;color:#7c3aed">产城融合</span>
+            </div>
+        </div>
+    </div>
+    <!-- 物业服务 -->
+    <div class="policy-sector">
+        <div class="sector-header sector-property">物业服务<span class="sector-count">3项</span></div>
+        <div class="sector-body">
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025年 · 住建部等</div>
+                <div class="sector-tl-text">《加强住宅物业服务管理的指导意见》</div>
+                <span class="sector-tl-tag" style="background:#dbeafe;color:#1d4ed8">规范收费</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025年 · 多地政府</div>
+                <div class="sector-tl-text">苏州等城市：公积金可支付物业费</div>
+                <span class="sector-tl-tag" style="background:#dcfce7;color:#15803d">惠民政策</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2020年 · 住建部等10部门</div>
+                <div class="sector-tl-text">《加强和改进住宅物业管理工作的通知》</div>
+                <span class="sector-tl-tag" style="background:#fce7f3;color:#be185d">服务延伸</span>
+            </div>
+        </div>
+    </div>
+    <!-- 园区科技 -->
+    <div class="policy-sector">
+        <div class="sector-header sector-tech">园区科技<span class="sector-count">3项</span></div>
+        <div class="sector-body">
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2025-09 · 工信部</div>
+                <div class="sector-tl-text">《高标准数字园区建设指南》2027年建200个</div>
+                <span class="sector-tl-tag" style="background:#dbeafe;color:#1d4ed8">数字园区</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2024-11 · 工信部等12部门</div>
+                <div class="sector-tl-text">《5G规模化应用"扬帆"行动升级方案》</div>
+                <span class="sector-tl-tag" style="background:#e0f2fe;color:#0369a1">新基建</span>
+            </div>
+            <div class="sector-tl-item">
+                <div class="sector-tl-date">2024-01 · 工信部等7部门</div>
+                <div class="sector-tl-text">《推动工业领域设备更新实施方案》</div>
+                <span class="sector-tl-tag" style="background:#fef3c7;color:#92400e">设备更新</span>
             </div>
         </div>
     </div>
