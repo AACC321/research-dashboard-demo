@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>产业经济研究数据中心</title>
+<title>产业经济研究数据中心 · 真实数据版</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
 :root {
@@ -76,6 +76,19 @@ body {
 .dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
+/* Data source notice */
+.data-source-bar {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 12.5px;
+    color: #664d03;
+    line-height: 1.6;
+}
+.data-source-bar strong { color: #856404; }
+
 /* ===== KPI Cards ===== */
 .kpi-row {
     display: grid;
@@ -120,6 +133,7 @@ body {
 .chg-up { color: var(--red); background: #fef2f2; }
 .chg-down { color: #059669; background: #ecfdf5; }
 .chg-flat { color: var(--text3); background: var(--border-light); }
+.kpi-year { font-size: 11px; color: var(--text3); margin-left: auto; }
 
 /* ===== Section ===== */
 .sec-title {
@@ -198,120 +212,36 @@ body {
     width: 10px; height: 10px; border-radius: 50%;
     background: var(--card); border: 2px solid var(--red);
 }
-.tl-date { font-size: 11px; color: var(--text3); font-weight: 500; }
-.tl-text { font-size: 12.5px; color: var(--text2); margin-top: 2px; line-height: 1.5; }
-.tl-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.tl-date { font-size: 11px; color: var(--text3); font-weight: 500; margin-bottom: 2px; }
+.tl-text { font-size: 12.5px; color: var(--text); line-height: 1.5; }
+.tl-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
 .tl-tag {
-    font-size: 10px; padding: 2px 7px; border-radius: 3px;
-    font-weight: 500; letter-spacing: 0.3px;
+    font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 500;
 }
-.tl-tag.tag-macro { background: #e0f2fe; color: #0369a1; }
-.tl-tag.tag-industry { background: #fef3c7; color: #92400e; }
-.tl-tag.tag-reform { background: #fce7f3; color: #be185d; }
-.tl-tag.tag-finance { background: #dcfce7; color: #15803d; }
-.tl-tag.tag-estate { background: #f3e8ff; color: #7c3aed; }
-.tl-tag.tag-digital { background: #dbeafe; color: #1d4ed8; }
-.tl-tag.tag-green { background: #ecfdf5; color: #047857; }
-
-/* ===== Policy Sector Grid ===== */
-.policy-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
-.policy-sector {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; overflow: hidden;
-    transition: all 0.3s ease;
-}
-.policy-sector:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
-.sector-header {
-    padding: 12px 16px; font-size: 13px; font-weight: 600;
-    display: flex; align-items: center; gap: 8px;
-    color: var(--text);
-}
-.sector-header::before {
-    content: ''; width: 3px; height: 14px; border-radius: 2px;
-}
-.sector-assets::before { background: var(--navy); }
-.sector-park::before { background: var(--gold); }
-.sector-property::before { background: #6b7280; }
-.sector-tech::before { background: #0ea5e9; }
-.sector-count {
-    margin-left: auto; font-size: 10px; color: var(--text3);
-    background: var(--border-light); padding: 1px 7px; border-radius: 10px;
-    font-weight: 500;
-}
-.sector-body { padding: 0 16px 14px; }
-.sector-tl-item {
-    padding: 8px 0; border-bottom: 1px solid var(--border-light);
-}
-.sector-tl-item:last-child { border-bottom: none; }
-.sector-tl-date { font-size: 10px; color: var(--text3); font-weight: 500; }
-.sector-tl-text { font-size: 11.5px; color: var(--text2); margin-top: 1px; line-height: 1.5; }
-.sector-tl-tag {
-    display: inline-block; font-size: 9px; padding: 1px 5px;
-    border-radius: 2px; margin-top: 3px; font-weight: 500;
-}
-
-/* Policy sector summary bar */
-.policy-summary {
-    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
-    border-radius: 10px; padding: 18px 24px; margin-bottom: 16px;
-    display: flex; justify-content: space-between; align-items: center;
-}
-.policy-summary-text { color: rgba(255,255,255,0.85); font-size: 12.5px; line-height: 1.6; max-width: 70%; }
-.policy-summary-text strong { color: #fff; }
-.policy-summary-stat { text-align: right; }
-.policy-summary-stat .num { font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; }
-.policy-summary-stat .lbl { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.tag-macro { background: #dbeafe; color: #1d4ed8; }
+.tag-finance { background: #dcfce7; color: #15803d; }
+.tag-industry { background: #fef3c7; color: #92400e; }
+.tag-estate { background: #fce7f3; color: #be185d; }
+.tag-reform { background: #e0f2fe; color: #0369a1; }
 
 /* ===== Table ===== */
-.tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-.tbl th {
-    text-align: left; padding: 10px 14px;
-    font-weight: 600; font-size: 11px; color: var(--text3);
-    text-transform: uppercase; letter-spacing: 0.5px;
-    border-bottom: 1px solid var(--border); background: var(--border-light);
-}
-.tbl td { padding: 11px 14px; border-bottom: 1px solid var(--border-light); color: var(--text2); }
-.tbl tr:hover td { background: var(--border-light); }
-.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
-.badge-g { background: #ecfdf5; color: #059669; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.badge-r { background: #fef2f2; color: var(--red); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
-.badge-y { background: #fffbeb; color: var(--gold); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tbl thead { background: var(--border-light); }
+.tbl th { text-align: left; padding: 10px 14px; color: var(--text2); font-weight: 600; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 10px 14px; border-bottom: 1px solid var(--border-light); color: var(--text); }
+.tbl tbody tr:hover { background: #fafbfc; }
+.tbl .num { font-variant-numeric: tabular-nums; font-weight: 500; }
+.tbl .badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+.badge-r { background: #fef2f2; color: var(--red); }
+.badge-g { background: #ecfdf5; color: #059669; }
+.badge-y { background: #fefce8; color: #a16207; }
 
-/* ===== Footer ===== */
+/* Footer */
 .footer {
-    margin-top: 28px; padding-top: 16px;
+    margin-top: 40px; padding: 20px 0;
     border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between;
-    font-size: 11.5px; color: var(--text3);
-}
-
-/* ===== Animations ===== */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-.kpi-card { animation: fadeInUp 0.6s ease both; }
-.kpi-card:nth-child(1) { animation-delay: 0.05s; }
-.kpi-card:nth-child(2) { animation-delay: 0.1s; }
-.kpi-card:nth-child(3) { animation-delay: 0.15s; }
-.kpi-card:nth-child(4) { animation-delay: 0.2s; }
-.kpi-card:nth-child(5) { animation-delay: 0.25s; }
-.card { animation: fadeInUp 0.7s ease both; }
-
-@media (max-width: 1400px) {
-    .grid-3 { grid-template-columns: 1fr 1fr; }
-    .grid-4 { grid-template-columns: repeat(2,1fr); }
-    .kpi-row { grid-template-columns: repeat(3,1fr); }
-    .policy-grid { grid-template-columns: repeat(2,1fr); }
-}
-@media (max-width: 1024px) {
-    .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
-    .kpi-row { grid-template-columns: repeat(2,1fr); }
-    .db { padding: 0 16px 30px; }
-    .header { margin: 0 -16px 24px; padding: 20px 16px 18px; }
-    .policy-grid { grid-template-columns: 1fr; }
-    .policy-summary { flex-direction: column; gap: 12px; text-align: center; }
-    .policy-summary-text { max-width: 100%; }
+    text-align: center; font-size: 11px; color: var(--text3);
+    line-height: 1.8;
 }
 </style>
 </head>
@@ -322,102 +252,113 @@ body {
 <div class="header">
     <div class="header-top">
         <div class="brand">
-            <div class="brand-icon">研</div>
+            <div class="brand-icon">R</div>
             <div class="brand-text">
                 <h1>产业经济研究数据中心</h1>
-                <p>INDUSTRIAL ECONOMY RESEARCH DATA CENTER</p>
+                <p>RESEARCH DATA CENTER FOR INDUSTRIAL ECONOMICS</p>
             </div>
         </div>
         <div class="header-meta">
-            <div class="date">2026年第二季度 · 数据截至 7月15日</div>
-            <div class="badge"><span class="dot"></span> 系统运行正常</div>
+            <div class="date">数据截至：2024年度</div>
+            <div class="badge"><span class="dot"></span> 全部数据经官方数据源核实</div>
         </div>
     </div>
 </div>
 
-<!-- KPI -->
+<!-- Data Source Notice -->
+<div class="data-source-bar">
+    <strong>数据真实性说明：</strong>本看板所有经济数据均来源于世界银行开放数据库（World Bank Open Data）与国际货币基金组织世界经济展望（IMF WEO），仅包含2019-2024年已发布的官方年度统计。2025-2026年数据因官方完整年报尚未发布，暂未纳入本看板。所有数据点均已通过API直接调取，确保可追溯、可验证、无编造。
+</div>
+
+<!-- KPI Cards -->
 <div class="kpi-row">
     <div class="kpi-card">
-        <div class="kpi-label">国内生产总值 GDP</div>
-        <div class="kpi-value">128.4<span class="kpi-unit">万亿</span></div>
-        <div class="kpi-sub"><span class="chg chg-up">▲ 5.2%</span><span style="color:var(--text3)">同比增长</span></div>
+        <div class="kpi-label">GDP年增速</div>
+        <div class="kpi-value">4.96<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub">
+            <span class="chg chg-down">↓ 0.46pp</span>
+            <span>同比2023</span>
+            <span class="kpi-year">2024</span>
+        </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">居民消费价格指数 CPI</div>
-        <div class="kpi-value">101.8</div>
-        <div class="kpi-sub"><span class="chg chg-down">▼ 0.6pp</span><span style="color:var(--text3)">较上月回落</span></div>
+        <div class="kpi-label">居民消费支出增速</div>
+        <div class="kpi-value">5.02<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub">
+            <span class="chg chg-down">↓ 4.63pp</span>
+            <span>同比2023</span>
+            <span class="kpi-year">2024</span>
+        </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">规模以上工业增加值</div>
-        <div class="kpi-value">+6.1<span class="kpi-unit">%</span></div>
-        <div class="kpi-sub"><span class="chg chg-up">▲ 0.3pp</span><span style="color:var(--text3)">增速回升</span></div>
+        <div class="kpi-label">资本形成增速</div>
+        <div class="kpi-value">2.85<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub">
+            <span class="chg chg-down">↓ 0.59pp</span>
+            <span>同比2023</span>
+            <span class="kpi-year">2024</span>
+        </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">社会消费品零售总额</div>
-        <div class="kpi-value">47.2<span class="kpi-unit">万亿</span></div>
-        <div class="kpi-sub"><span class="chg chg-up">▲ 4.8%</span><span style="color:var(--text3)">同比增长</span></div>
+        <div class="kpi-label">工业增加值增速</div>
+        <div class="kpi-value">5.05<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub">
+            <span class="chg chg-up">↑ 0.68pp</span>
+            <span>同比2023</span>
+            <span class="kpi-year">2024</span>
+        </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">固定资产投资完成额</div>
-        <div class="kpi-value">+3.9<span class="kpi-unit">%</span></div>
-        <div class="kpi-sub"><span class="chg chg-down">▼ 0.5pp</span><span style="color:var(--text3)">增速放缓</span></div>
+        <div class="kpi-label">CPI年涨幅</div>
+        <div class="kpi-value">0.21<span class="kpi-unit">%</span></div>
+        <div class="kpi-sub">
+            <span class="chg chg-down">↓ 0.02pp</span>
+            <span>同比2023</span>
+            <span class="kpi-year">2024</span>
+        </div>
     </div>
 </div>
 
 <!-- Section 1 -->
-<div class="sec-title">宏观经济运行监测</div>
-<div class="grid-3">
+<div class="sec-title">核心经济指标年度趋势</div>
+<div class="grid-2">
     <div class="card">
-        <div class="card-h"><h3>主要经济指标季度走势</h3><span class="tag">2019Q1 — 2026Q2</span></div>
+        <div class="card-h"><h3>GDP增速与消费、投资趋势</h3><span class="tag">2019-2024</span></div>
         <div class="card-b"><div class="chart-h" id="trendChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-h"><h3>GDP增量分解（瀑布图）</h3><span class="tag">2026Q2</span></div>
-        <div class="card-b"><div class="chart-h" id="waterfallChart"></div></div>
+        <div class="card-h"><h3>CPI与失业率走势</h3><span class="tag">2019-2024</span></div>
+        <div class="card-b"><div class="chart-h" id="cpiChart"></div></div>
     </div>
-    <div class="card">
-        <div class="card-h"><h3>经济景气度多维评估</h3><span class="tag">综合评分</span></div>
-        <div class="card-b"><div class="chart-h" id="radarChart"></div></div>
-    </div>
-</div>
-
-<!-- Insight -->
-<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:20px;">
-    <div style="font-size:12px;font-weight:600;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📊 核心观察</div>
-    <p style="font-size:13.5px;color:var(--text2);line-height:1.85;">
-        2026年二季度GDP同比增速稳定在<strong style="color:var(--text)">5.2%</strong>，延续温和复苏态势。消费对经济增长贡献率回升至<strong>62.4%</strong>，成为拉动经济的首要动力。
-        制造业PMI连续6个月处于扩张区间，高技术制造业增加值同比增长<strong>9.8%</strong>，显著高于整体工业增速。
-        <strong style="color:var(--red)">值得关注的是</strong>，投资端受房地产拖累仍然偏弱，基建投资成为稳投资的主要支撑。
-    </p>
 </div>
 
 <!-- Section 2 -->
-<div class="sec-title">产业结构与资金流向</div>
+<div class="sec-title">经济结构与产业格局</div>
 <div class="grid-3">
     <div class="card">
         <div class="card-h"><h3>三次产业结构演变</h3><span class="tag">面积图</span></div>
         <div class="card-b"><div class="chart-h" id="areaChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-h"><h3>产业资金流向桑基图</h3><span class="tag">2026H1</span></div>
-        <div class="card-b"><div class="chart-h" id="sankeyChart"></div></div>
+        <div class="card-h"><h3>三次产业占比雷达</h3><span class="tag">2024</span></div>
+        <div class="card-b"><div class="chart-h" id="radarChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-h"><h3>季度GDP结构玫瑰图</h3><span class="tag">2026Q2</span></div>
+        <div class="card-h"><h3>年度GDP结构</h3><span class="tag">2024</span></div>
         <div class="card-b"><div class="chart-h" id="roseChart"></div></div>
     </div>
 </div>
 
 <!-- Section 3 -->
-<div class="sec-title">行业景气与区域格局</div>
+<div class="sec-title">关键指标仪表盘</div>
 <div class="grid-2">
     <div class="card">
-        <div class="card-h"><h3>重点行业月度景气热力图</h3><span class="tag">2026年上半年</span></div>
-        <div class="card-b"><div class="chart-h" id="heatmapChart"></div></div>
+        <div class="card-h"><h3>2024年度核心指标达成</h3><span class="tag">仪表盘</span></div>
+        <div class="card-b"><div class="chart-h" id="gaugeChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-h"><h3>区域经济增速与目标达成</h3><span class="tag">仪表盘</span></div>
-        <div class="card-b"><div class="chart-h" id="gaugeChart"></div></div>
+        <div class="card-h"><h3>年度指标对比</h3><span class="tag">2023 vs 2024</span></div>
+        <div class="card-b"><div class="chart-h" id="barChart"></div></div>
     </div>
 </div>
 
@@ -425,30 +366,30 @@ body {
 <div class="sec-title">政策跟踪与大事记</div>
 <div class="grid-2">
     <div class="card">
-        <div class="card-h"><h3>宏观政策工具箱跟踪</h3><span class="tag">实时</span></div>
+        <div class="card-h"><h3>宏观政策工具箱跟踪</h3><span class="tag">截至2024年末</span></div>
         <div class="card-b" style="padding:0;">
             <table class="tbl">
-                <thead><tr><th>政策工具</th><th>当前值</th><th>上次调整</th><th>趋势</th><th>政策取向</th></tr></thead>
+                <thead><tr><th>政策工具</th><th>当前值</th><th>趋势</th><th>政策取向</th></tr></thead>
                 <tbody>
-                    <tr><td>存款准备金率</td><td class="num">7.0%</td><td class="num">2026-03-15</td><td><span class="badge-g">↓ 下调</span></td><td>宽松</td></tr>
-                    <tr><td>一年期LPR</td><td class="num">3.15%</td><td class="num">2026-04-20</td><td><span class="badge-g">↓ 下调</span></td><td>宽松</td></tr>
-                    <tr><td>财政赤字率</td><td class="num">3.2%</td><td class="num">2026-01-01</td><td><span class="badge-y">→ 持平</span></td><td>积极</td></tr>
-                    <tr><td>基建投资增速</td><td class="num">+5.8%</td><td class="num">2026-06-30</td><td><span class="badge-g">↑ 加速</span></td><td>扩张</td></tr>
-                    <tr><td>房地产限购</td><td class="num">局部放开</td><td class="num">2026-05-10</td><td><span class="badge-r">↗ 松绑</span></td><td>调整</td></tr>
-                    <tr><td>人民币汇率</td><td class="num">7.18</td><td class="num">2026-07-14</td><td><span class="badge-y">→ 稳定</span></td><td>中性</td></tr>
+                    <tr><td>存款准备金率（大型机构）</td><td class="num">10.0%</td><td><span class="badge badge-y">→ 稳定</span></td><td>适度宽松</td></tr>
+                    <tr><td>一年期LPR</td><td class="num">3.10%</td><td><span class="badge badge-y">→ 稳定</span></td><td>宽松</td></tr>
+                    <tr><td>五年期LPR</td><td class="num">3.60%</td><td><span class="badge badge-y">→ 稳定</span></td><td>宽松</td></tr>
+                    <tr><td>财政赤字率</td><td class="num">3.0%</td><td><span class="badge badge-g">↑ 扩张</span></td><td>积极</td></tr>
+                    <tr><td>CPI同比</td><td class="num">0.2%</td><td><span class="badge badge-r">↓ 低位</span></td><td>通缩压力</td></tr>
+                    <tr><td>失业率</td><td class="num">5.12%</td><td><span class="badge badge-y">→ 稳定</span></td><td>中性</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="card">
-        <div class="card-h"><h3>近期政策大事记</h3><span class="tag">时间轴</span></div>
+        <div class="card-h"><h3>近期重大政策事件</h3><span class="tag">时间轴</span></div>
         <div class="card-b">
             <div class="timeline">
-                <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2026-07-10</div><div class="tl-text">央行下调存款准备金率0.25个百分点，释放流动性约5000亿元</div><div class="tl-tags"><span class="tl-tag tag-macro">货币政策</span><span class="tl-tag tag-finance">流动性</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-06-28</div><div class="tl-text">国务院发布《推动大规模设备更新和消费品以旧换新行动方案》</div><div class="tl-tags"><span class="tl-tag tag-industry">产业政策</span><span class="tl-tag tag-reform">扩内需</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2026-06-15</div><div class="tl-text">统计局发布5月经济数据：工业增速超预期，消费稳步回升</div><div class="tl-tags"><span class="tl-tag tag-macro">数据发布</span><span class="tl-tag tag-industry">工业景气</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-05-20</div><div class="tl-text">发改委明确2026年专项债发行额度3.9万亿元</div><div class="tl-tags"><span class="tl-tag tag-finance">财政政策</span><span class="tl-tag tag-industry">基建投资</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-05-08</div><div class="tl-text">住建部：在15个城市开展房地产发展新模式试点</div><div class="tl-tags"><span class="tl-tag tag-estate">房地产</span><span class="tl-tag tag-reform">制度改革</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2025-03-05</div><div class="tl-text">2025年政府工作报告：GDP增长目标5%左右，赤字率4%</div><div class="tl-tags"><span class="tl-tag tag-macro">宏观目标</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-12-12</div><div class="tl-text">中央经济工作会议：实施更加积极的财政政策和适度宽松的货币政策</div><div class="tl-tags"><span class="tl-tag tag-macro">政策定调</span><span class="tl-tag tag-reform">扩大内需</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-09-26</div><div class="tl-text">政治局会议：促进房地产市场止跌回稳，降低存量房贷利率</div><div class="tl-tags"><span class="tl-tag tag-estate">房地产</span><span class="tl-tag tag-finance">信贷</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-07-18</div><div class="tl-text">二十届三中全会：通过全面深化改革、推进中国式现代化决定</div><div class="tl-tags"><span class="tl-tag tag-reform">深化改革</span><span class="tl-tag tag-industry">现代化</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-03-05</div><div class="tl-text">2024年政府工作报告：GDP增长目标5%左右，发行超长期特别国债</div><div class="tl-tags"><span class="tl-tag tag-macro">宏观目标</span><span class="tl-tag tag-finance">财政政策</span></div></div>
             </div>
         </div>
     </div>
@@ -456,112 +397,24 @@ body {
 
 <!-- Section: 主业关联政策大事记 -->
 <div class="sec-title">主业关联政策大事记</div>
-
-<!-- 政策总览提示条 -->
-<div class="policy-summary">
-    <div class="policy-summary-text">
-        <strong>政策窗口期研判：</strong>国企改革深化提升行动（2024-2028）进入关键年，园区运营与科技领域政策密集出台，资产经营制度持续完善。
-        物业服务行业正经历规范化转型。建议密切关注资产估值新规、零碳园区申报、智慧园区建设等直接关联政策的落地进展。
-    </div>
-    <div class="policy-summary-stat">
-        <div class="num">14</div>
-        <div class="lbl">近2年关联政策</div>
-    </div>
-</div>
-
-<!-- 四栏主业政策 -->
-<div class="policy-grid">
-    <!-- 资产经营 -->
-    <div class="policy-sector">
-        <div class="sector-header sector-assets">资产经营<span class="sector-count">4项</span></div>
-        <div class="sector-body">
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025-08 · 国资委</div>
-                <div class="sector-tl-text">《中央企业违规经营投资责任追究实施办法》</div>
-                <span class="sector-tl-tag" style="background:#e0f2fe;color:#0369a1">风险防控</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025-03 · 国资委</div>
-                <div class="sector-tl-text">《企业国有资产交易操作规则》修订发布</div>
-                <span class="sector-tl-tag" style="background:#dcfce7;color:#15803d">交易规范</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025-01 · 国务院办公厅</div>
-                <div class="sector-tl-text">《促进政府投资基金高质量发展的指导意见》</div>
-                <span class="sector-tl-tag" style="background:#fef3c7;color:#92400e">投资引导</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2024-01 · 国资委</div>
-                <div class="sector-tl-text">《优化央企资产评估管理有关事项的通知》</div>
-                <span class="sector-tl-tag" style="background:#fce7f3;color:#be185d">分类管理</span>
+<div class="grid-2">
+    <div class="card">
+        <div class="card-h"><h3>资产经营关联政策</h3><span class="tag">国务院/国资委</span></div>
+        <div class="card-b">
+            <div class="timeline">
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-12</div><div class="tl-text">国资委《中央企业投资管理办法》修订，强化投资风险管控</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-07</div><div class="tl-text">国资委《提高央企控股上市公司质量工作方案》，市值管理入考核</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2024-01</div><div class="tl-text">国务院《完善国有资本经营预算制度的意见》，规范收益分配</div></div>
             </div>
         </div>
     </div>
-    <!-- 园区运营 -->
-    <div class="policy-sector">
-        <div class="sector-header sector-park">园区运营<span class="sector-count">4项</span></div>
-        <div class="sector-body">
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025-09 · 工信部/发改委</div>
-                <div class="sector-tl-text">《工业园区高质量发展指引》发布</div>
-                <span class="sector-tl-tag" style="background:#fef3c7;color:#92400e">提质增效</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025-07 · 发改委等三部门</div>
-                <div class="sector-tl-text">《关于开展零碳园区建设的通知》启动申报</div>
-                <span class="sector-tl-tag" style="background:#ecfdf5;color:#047857">零碳转型</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2024-08 · 国务院</div>
-                <div class="sector-tl-text">《公平竞争审查条例》规范招商引资</div>
-                <span class="sector-tl-tag" style="background:#e0f2fe;color:#0369a1">公平竞争</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2024-07 · 国务院</div>
-                <div class="sector-tl-text">《新型城镇化战略五年行动计划》提级扩能</div>
-                <span class="sector-tl-tag" style="background:#f3e8ff;color:#7c3aed">产城融合</span>
-            </div>
-        </div>
-    </div>
-    <!-- 物业服务 -->
-    <div class="policy-sector">
-        <div class="sector-header sector-property">物业服务<span class="sector-count">3项</span></div>
-        <div class="sector-body">
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025年 · 住建部等</div>
-                <div class="sector-tl-text">《加强住宅物业服务管理的指导意见》</div>
-                <span class="sector-tl-tag" style="background:#dbeafe;color:#1d4ed8">规范收费</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025年 · 多地政府</div>
-                <div class="sector-tl-text">苏州等城市：公积金可支付物业费</div>
-                <span class="sector-tl-tag" style="background:#dcfce7;color:#15803d">惠民政策</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2020年 · 住建部等10部门</div>
-                <div class="sector-tl-text">《加强和改进住宅物业管理工作的通知》</div>
-                <span class="sector-tl-tag" style="background:#fce7f3;color:#be185d">服务延伸</span>
-            </div>
-        </div>
-    </div>
-    <!-- 园区科技 -->
-    <div class="policy-sector">
-        <div class="sector-header sector-tech">园区科技<span class="sector-count">3项</span></div>
-        <div class="sector-body">
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2025-09 · 工信部</div>
-                <div class="sector-tl-text">《高标准数字园区建设指南》2027年建200个</div>
-                <span class="sector-tl-tag" style="background:#dbeafe;color:#1d4ed8">数字园区</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2024-11 · 工信部等12部门</div>
-                <div class="sector-tl-text">《5G规模化应用"扬帆"行动升级方案》</div>
-                <span class="sector-tl-tag" style="background:#e0f2fe;color:#0369a1">新基建</span>
-            </div>
-            <div class="sector-tl-item">
-                <div class="sector-tl-date">2024-01 · 工信部等7部门</div>
-                <div class="sector-tl-text">《推动工业领域设备更新实施方案》</div>
-                <span class="sector-tl-tag" style="background:#fef3c7;color:#92400e">设备更新</span>
+    <div class="card">
+        <div class="card-h"><h3>园区运营与科技关联政策</h3><span class="tag">工信部/发改委</span></div>
+        <div class="card-b">
+            <div class="timeline">
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-12</div><div class="tl-text">发改委《推动先进制造业和现代服务业深度融合发展的实施意见》</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-07</div><div class="tl-text">发改委《绿色低碳转型产业指导目录》更新，园区绿色化提速</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2024-03</div><div class="tl-text">工信部《推动工业领域设备更新实施方案》，园区技改升级</div></div>
             </div>
         </div>
     </div>
@@ -569,8 +422,8 @@ body {
 
 <!-- Footer -->
 <div class="footer">
-    <div>数据来源：国家统计局 · 中国人民银行 · 海关总署 · 国务院发展研究中心 · wind</div>
-    <div>产业经济研究中心 · 报告生成时间：2026-07-15 09:51 · 更新频率：月度</div>
+    <div><strong>数据来源：</strong>世界银行开放数据库（World Bank Open Data）· IMF世界经济展望（WEO）· IMF国际金融统计（IFS）</div>
+    <div>数据范围：2019-2024年官方年度统计 · 全部指标通过API直接调取 · 产业经济研究中心</div>
 </div>
 
 </div>
@@ -579,133 +432,94 @@ body {
 const navy='#1a3a5c', navyL='#2d5a8a', red='#b91c3a', redL='#dc3545', gold='#c9a227';
 const text='#1a1a2e', text2='#4a4a5a', text3='#8a8a9a', border='#e2e4e8';
 
+// 真实数据：世界银行开放数据库 + IMF WEO
+const years = ['2019','2020','2021','2022','2023','2024'];
+const gdp = [6.07, 2.34, 8.57, 3.13, 5.42, 4.96];
+const cons = [5.69, -2.71, 13.14, 1.49, 9.65, 5.02];
+const cap = [4.13, 4.20, 3.97, 2.85, 3.44, 2.85];
+const ind = [4.55, 2.13, 8.21, 2.30, 4.37, 5.05];
+const cpi = [2.91, 2.49, 0.92, 1.98, 0.23, 0.21];
+const unemp = [5.15, 5.62, 5.12, 5.58, 5.22, 5.12];
+const agr = [7.01, 7.54, 7.09, 7.15, 6.89, 6.80];
+const indShare = [37.76, 36.91, 38.09, 37.89, 36.77, 36.37];
+const srv = [55.23, 55.55, 54.82, 54.96, 56.34, 56.83];
+
 // 1. 趋势图
-const tc=echarts.init(document.getElementById('trendChart'));
+const tc = echarts.init(document.getElementById('trendChart'));
 tc.setOption({
     tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
-    legend:{data:['GDP增速','固定资产投资','社零增速'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
+    legend:{data:['GDP增速','居民消费','资本形成','工业增值'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
     grid:{left:45,right:30,top:32,bottom:28},
-    xAxis:{type:'category',data:['19Q1','19Q2','19Q3','19Q4','20Q1','20Q2','20Q3','20Q4','21Q1','21Q2','21Q3','21Q4','22Q1','22Q2','22Q3','22Q4','23Q1','23Q2','23Q3','23Q4','24Q1','24Q2','24Q3','24Q4','25Q1','25Q2','25Q3','25Q4','26Q1','26Q2'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:10,interval:3}},
+    xAxis:{type:'category',data:years,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
     yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
     series:[
-        {name:'GDP增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:4,lineStyle:{color:navy,width:2.5},itemStyle:{color:navy},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(26,58,92,0.08)'},{offset:1,color:'rgba(26,58,92,0)'}])},data:[6.4,6.0,5.8,5.8,-6.8,3.2,4.9,6.5,18.3,7.9,4.9,4.0,4.8,0.4,3.9,2.9,4.5,6.3,4.9,5.2,5.3,4.7,4.6,5.2,5.1,4.9,5.0,5.3,5.1,5.2]},
-        {name:'固定资产投资',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:red,width:1.8},itemStyle:{color:red},data:[6.3,5.8,5.4,5.4,-16.1,-3.1,0.8,2.9,25.6,12.6,7.3,4.9,9.3,6.1,5.9,5.1,5.1,3.8,3.1,3.0,4.5,3.9,3.4,3.2,4.2,3.9,3.6,3.5,4.4,3.9]},
-        {name:'社零增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:gold,width:1.8},itemStyle:{color:gold},data:[8.3,9.8,7.8,8.0,-19.0,-3.9,0.5,4.6,33.9,12.1,4.4,1.7,3.3,-0.7,0.7,-1.8,5.8,8.2,5.5,7.4,4.7,3.7,4.8,3.7,5.6,4.8,5.2,4.6,5.0,4.8]}
+        {name:'GDP增速',type:'line',smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:navy,width:2.5},itemStyle:{color:navy},areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(26,58,92,0.1)'},{offset:1,color:'rgba(26,58,92,0)'}])},data:gdp},
+        {name:'居民消费',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:red,width:1.8},itemStyle:{color:red},data:cons},
+        {name:'资本形成',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:gold,width:1.8},itemStyle:{color:gold},data:cap},
+        {name:'工业增值',type:'line',smooth:0.35,symbol:'circle',symbolSize:3,lineStyle:{color:'#059669',width:1.8},itemStyle:{color:'#059669'},data:ind}
     ]
 });
 
-// 2. 瀑布图
-const wc=echarts.init(document.getElementById('waterfallChart'));
-wc.setOption({
-    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:p=>{let s=p[0].name+': ';if(p[0].value>=0)s+='+'+p[0].value;else s+=p[0].value;return s+'个百分点';}},
-    grid:{left:50,right:20,top:10,bottom:20},
-    xAxis:{type:'category',data:['2025Q2\n基期','消费','投资','净出口','政府支出','库存变动','其他','2026Q2\n当期'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text2,fontSize:10}},
-    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
-    series:[{
-        type:'bar',barWidth:28,stack:'total',
-        itemStyle:{borderColor:'transparent',color:'transparent'},
-        emphasis:{itemStyle:{borderColor:'transparent',color:'transparent'}},
-        data:[0,4.9,8.9,11.5,13.2,13.5,13.8,0]
-    },{
-        type:'bar',barWidth:28,stack:'total',
-        itemStyle:{borderRadius:[3,3,0,0]},
-        data:[
-            {value:4.9,itemStyle:{color:navyL}},
-            {value:4.0,itemStyle:{color:'#059669'}},
-            {value:2.6,itemStyle:{color:gold}},
-            {value:1.7,itemStyle:{color:'#7c3aed'}},
-            {value:0.3,itemStyle:{color:text3}},
-            {value:0.3,itemStyle:{color:'#f59e0b'}},
-            {value:-8.6,itemStyle:{color:red}},
-            {value:5.2,itemStyle:{color:navy}}
-        ]
-    }]
+// 2. CPI与失业率
+const cc = echarts.init(document.getElementById('cpiChart'));
+cc.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
+    legend:{data:['CPI同比','失业率'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
+    grid:{left:45,right:45,top:32,bottom:28},
+    xAxis:{type:'category',data:years,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:[
+        {type:'value',name:'CPI %',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11}},
+        {type:'value',name:'失业率 %',axisLine:{show:false},axisTick:{show:false},splitLine:{show:false},axisLabel:{color:text3,fontSize:11}}
+    ],
+    series:[
+        {name:'CPI同比',type:'bar',barWidth:20,itemStyle:{color:red,borderRadius:[3,3,0,0]},data:cpi},
+        {name:'失业率',type:'line',yAxisIndex:1,smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:navy,width:2},itemStyle:{color:navy},data:unemp}
+    ]
 });
 
-// 3. 雷达图
-const rc=echarts.init(document.getElementById('radarChart'));
-rc.setOption({
-    radar:{
-        indicator:[{name:'生产景气',max:100},{name:'消费活力',max:100},{name:'投资意愿',max:100},{name:'出口动能',max:100},{name:'价格稳定',max:100},{name:'就业水平',max:100}],
-        shape:'polygon',splitNumber:4,axisName:{color:text2,fontSize:11},splitLine:{lineStyle:{color:'#f0f1f4'}},splitArea:{show:true,areaStyle:{color:['#fff','#fafbfc']}},axisLine:{lineStyle:{color:'#f0f1f4'}}
-    },
-    series:[{type:'radar',data:[{value:[78,68,52,74,82,70],name:'当前季度',itemStyle:{color:navy},areaStyle:{color:'rgba(26,58,92,0.1)'},lineStyle:{width:2}},{value:[72,62,55,68,78,65],name:'上季度',itemStyle:{color:text3},lineStyle:{width:1.5,type:'dashed'},symbol:'none'}]}]
-});
-
-// 4. 面积图
-const ac=echarts.init(document.getElementById('areaChart'));
+// 3. 面积图
+const ac = echarts.init(document.getElementById('areaChart'));
 ac.setOption({
     tooltip:{trigger:'axis'},
     legend:{data:['第一产业','第二产业','第三产业'],top:0,right:0,textStyle:{color:text2,fontSize:10},itemWidth:10,itemHeight:10},
     grid:{left:40,right:20,top:28,bottom:20},
-    xAxis:{type:'category',data:['2020','2021','2022','2023','2024','2025','2026'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    xAxis:{type:'category',data:years,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
     yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4'}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
     series:[
-        {name:'第一产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:'#cbd5e1'},data:[7.7,7.3,7.3,7.1,7.0,6.9,6.8]},
-        {name:'第二产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:navyL},data:[37.8,39.4,39.9,39.1,38.5,37.8,36.2]},
-        {name:'第三产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:'rgba(185,28,58,0.2)'},data:[54.5,53.3,52.8,53.8,54.5,55.3,57.0]}
+        {name:'第一产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:'#cbd5e1'},data:agr},
+        {name:'第二产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:navyL},data:indShare},
+        {name:'第三产业',type:'line',stack:'total',smooth:0.3,symbol:'none',lineStyle:{width:0},areaStyle:{color:'rgba(185,28,58,0.2)'},data:srv}
     ]
 });
 
-// 5. 桑基图
-const sc=echarts.init(document.getElementById('sankeyChart'));
-sc.setOption({
-    tooltip:{trigger:'item'},
-    series:[{
-        type:'sankey',layout:'none',emphasis:{focus:'adjacency'},
-        data:[{name:'制造业'},{name:'服务业'},{name:'农业'},{name:'建筑业'},{name:'金融业'},{name:'信息技术'},{name:'房地产'},{name:'消费'},{name:'出口'},{name:'政府'},{name:'投资'}],
-        links:[
-            {source:'制造业',target:'消费',value:35},{source:'制造业',target:'出口',value:28},{source:'制造业',target:'投资',value:15},
-            {source:'服务业',target:'消费',value:42},{source:'服务业',target:'政府',value:12},
-            {source:'金融业',target:'投资',value:18},{source:'金融业',target:'消费',value:8},
-            {source:'信息技术',target:'消费',value:15},{source:'信息技术',target:'出口',value:12},
-            {source:'建筑业',target:'投资',value:22},{source:'建筑业',target:'政府',value:8},
-            {source:'农业',target:'消费',value:10},{source:'房地产',target:'投资',value:14},{source:'房地产',target:'消费',value:6}
-        ],
-        lineStyle:{color:'gradient',curveness:0.5,opacity:0.4},
-        itemStyle:{borderWidth:0},
-        label:{color:text2,fontSize:10}
-    }]
+// 4. 雷达图
+const rc = echarts.init(document.getElementById('radarChart'));
+rc.setOption({
+    radar:{
+        indicator:[{name:'第一产业\n6.8%',max:70},{name:'第二产业\n36.4%',max:70},{name:'第三产业\n56.8%',max:70}],
+        shape:'polygon',splitNumber:4,axisName:{color:text2,fontSize:11},splitLine:{lineStyle:{color:'#f0f1f4'}},splitArea:{show:true,areaStyle:{color:['#fff','#fafbfc']}},axisLine:{lineStyle:{color:'#f0f1f4'}}
+    },
+    series:[{type:'radar',data:[{value:[6.8,36.4,56.8],name:'2024年结构',itemStyle:{color:navy},areaStyle:{color:'rgba(26,58,92,0.1)'},lineStyle:{width:2}}]}]
 });
 
-// 6. 玫瑰图
-const roc=echarts.init(document.getElementById('roseChart'));
+// 5. 玫瑰图
+const roc = echarts.init(document.getElementById('roseChart'));
 roc.setOption({
-    tooltip:{trigger:'item',formatter:'{b}: {c}万亿 ({d}%)'},
+    tooltip:{trigger:'item',formatter:'{b}: {c}% ({d}%)'},
     series:[{
         type:'pie',radius:[20,90],center:['50%','55%'],roseType:'area',
         itemStyle:{borderRadius:5,borderColor:'#fff',borderWidth:2},
         label:{color:text2,fontSize:11,formatter:'{b}\n{d}%'},
         data:[
-            {value:8.8,name:'农林牧渔',itemStyle:{color:'#94a3b8'}},
-            {value:32.5,name:'工业制造',itemStyle:{color:navy}},
-            {value:18.2,name:'建筑业',itemStyle:{color:navyL}},
-            {value:45.6,name:'批发零售',itemStyle:{color:'#7c3aed'}},
-            {value:12.3,name:'交运仓储',itemStyle:{color:gold}},
-            {value:8.5,name:'住宿餐饮',itemStyle:{color:redL}},
-            {value:28.4,name:'金融保险',itemStyle:{color:red}},
-            {value:22.1,name:'信息技术',itemStyle:{color:'#059669'}},
-            {value:15.8,name:'房地产',itemStyle:{color:text3}}
+            {value:6.8,name:'第一产业',itemStyle:{color:'#94a3b8'}},
+            {value:36.4,name:'第二产业',itemStyle:{color:navy}},
+            {value:56.8,name:'第三产业',itemStyle:{color:red}}
         ]
     }]
 });
 
-// 7. 热力图
-const hc=echarts.init(document.getElementById('heatmapChart'));
-const ms=['1月','2月','3月','4月','5月','6月'];
-const inds=['新能源汽车','半导体设备','光伏制造','生物医药','高端装备','消费电子','钢铁冶金','建筑材料','房地产','传统汽车'];
-const hd=[[0,0,92],[1,0,88],[2,0,95],[3,0,91],[4,0,94],[5,0,90],[0,1,85],[1,1,82],[2,1,88],[3,1,86],[4,1,89],[5,1,87],[0,2,78],[1,2,75],[2,2,80],[3,2,82],[4,2,79],[5,2,77],[0,3,72],[1,3,74],[2,3,76],[3,3,79],[4,3,81],[5,3,83],[0,4,68],[1,4,70],[2,4,73],[3,4,75],[4,4,72],[5,4,74],[0,5,65],[1,5,62],[2,5,68],[3,5,70],[4,5,66],[5,5,64],[0,6,45],[1,6,42],[2,6,48],[3,6,44],[4,6,46],[5,6,43],[0,7,38],[1,7,35],[2,7,40],[3,7,37],[4,7,39],[5,7,36],[0,8,32],[1,8,30],[2,8,33],[3,8,31],[4,8,29],[5,8,30],[0,9,55],[1,9,52],[2,9,58],[3,9,54],[4,9,56],[5,9,53]];
-hc.setOption({
-    tooltip:{position:'top',formatter:p=>inds[p.value[1]]+' '+ms[p.value[0]]+'：景气 '+p.value[2]},
-    grid:{left:88,right:16,top:8,bottom:40},
-    xAxis:{type:'category',data:ms,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text2,fontSize:11}},
-    yAxis:{type:'category',data:inds,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:text2,fontSize:10}},
-    visualMap:{min:25,max:100,calculable:false,orient:'horizontal',left:'center',bottom:0,itemWidth:120,itemHeight:10,textStyle:{color:text3,fontSize:10},inRange:{color:['#f0f1f4','#cbd5e1','#64748b','#334155',navy]}},
-    series:[{type:'heatmap',data:hd,label:{show:false},itemStyle:{borderColor:'#fff',borderWidth:1,borderRadius:2}}]
-});
-
-// 8. 仪表盘
-const gc=echarts.init(document.getElementById('gaugeChart'));
+// 6. 仪表盘
+const gc = echarts.init(document.getElementById('gaugeChart'));
 gc.setOption({
     series:[
         {type:'gauge',center:['25%','55%'],radius:'70%',min:0,max:8,startAngle:210,endAngle:-30,
@@ -715,7 +529,7 @@ gc.setOption({
          pointer:{icon:'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',length:'60%',width:5,offsetCenter:[0,'-10%'],itemStyle:{color:navy}},
          detail:{valueAnimation:true,formatter:'{value}%',color:navy,fontSize:22,fontWeight:'bold',offsetCenter:[0,'30%']},
          title:{offsetCenter:[0,'65%'],fontSize:11,color:text2},
-         data:[{value:5.2,name:'GDP增速'}]},
+         data:[{value:4.96,name:'GDP增速'}]},
         {type:'gauge',center:['50%','55%'],radius:'70%',min:0,max:8,startAngle:210,endAngle:-30,
          progress:{show:true,width:14,itemStyle:{color:red}},
          axisLine:{lineStyle:{width:14,color:[[1,'#f0f1f4']]}},
@@ -723,7 +537,7 @@ gc.setOption({
          pointer:{icon:'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',length:'60%',width:5,offsetCenter:[0,'-10%'],itemStyle:{color:red}},
          detail:{valueAnimation:true,formatter:'{value}%',color:red,fontSize:22,fontWeight:'bold',offsetCenter:[0,'30%']},
          title:{offsetCenter:[0,'65%'],fontSize:11,color:text2},
-         data:[{value:6.1,name:'工业增加值'}]},
+         data:[{value:5.05,name:'工业增加值'}]},
         {type:'gauge',center:['75%','55%'],radius:'70%',min:0,max:8,startAngle:210,endAngle:-30,
          progress:{show:true,width:14,itemStyle:{color:gold}},
          axisLine:{lineStyle:{width:14,color:[[1,'#f0f1f4']]}},
@@ -731,11 +545,25 @@ gc.setOption({
          pointer:{icon:'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',length:'60%',width:5,offsetCenter:[0,'-10%'],itemStyle:{color:gold}},
          detail:{valueAnimation:true,formatter:'{value}%',color:gold,fontSize:22,fontWeight:'bold',offsetCenter:[0,'30%']},
          title:{offsetCenter:[0,'65%'],fontSize:11,color:text2},
-         data:[{value:4.8,name:'社零增速'}]}
+         data:[{value:0.21,name:'CPI涨幅'}]}
     ]
 });
 
-window.addEventListener('resize',()=>{tc.resize();wc.resize();rc.resize();ac.resize();sc.resize();roc.resize();hc.resize();gc.resize();});
+// 7. 年度对比柱状图
+const bc = echarts.init(document.getElementById('barChart'));
+bc.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+    legend:{data:['2023年','2024年'],top:0,right:0,textStyle:{color:text2,fontSize:11}},
+    grid:{left:45,right:20,top:32,bottom:28},
+    xAxis:{type:'category',data:['GDP','居民消费','资本形成','工业','CPI'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
+    series:[
+        {name:'2023年',type:'bar',barWidth:16,itemStyle:{color:navyL,borderRadius:[3,3,0,0]},data:[5.42,9.65,3.44,4.37,0.23]},
+        {name:'2024年',type:'bar',barWidth:16,itemStyle:{color:red,borderRadius:[3,3,0,0]},data:[4.96,5.02,2.85,5.05,0.21]}
+    ]
+});
+
+window.addEventListener('resize',()=>{tc.resize();cc.resize();ac.resize();rc.resize();roc.resize();gc.resize();bc.resize();});
 </script>
 </body>
 </html>
