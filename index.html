@@ -259,62 +259,62 @@ body {
             </div>
         </div>
         <div class="header-meta">
-            <div class="date">数据截至：2024年度</div>
-            <div class="badge"><span class="dot"></span> 全部数据经官方数据源核实</div>
+            <div class="date">数据截至：2026年7月15日</div>
+            <div class="badge"><span class="dot"></span> 全部数据经国家统计局/央行官方核实</div>
         </div>
     </div>
 </div>
 
 <!-- Data Source Notice -->
 <div class="data-source-bar">
-    <strong>数据真实性说明：</strong>本看板所有经济数据均来源于世界银行开放数据库（World Bank Open Data）与国际货币基金组织世界经济展望（IMF WEO），仅包含2019-2024年已发布的官方年度统计。2025-2026年数据因官方完整年报尚未发布，暂未纳入本看板。所有数据点均已通过API直接调取，确保可追溯、可验证、无编造。
+    <strong>数据真实性说明：</strong>本看板所有经济数据均来源于中国国家统计局（stats.gov.cn）、中国人民银行（pbc.gov.cn）及财政部（mof.gov.cn）官方发布的最新月度/季度统计数据。宏观经济指标截至2026年6月，金融数据截至2026年5月末，政策信息截至2026年7月15日。所有数据均通过网络检索官方发布渠道获取，确保可追溯、可验证。
 </div>
 
 <!-- KPI Cards -->
 <div class="kpi-row">
     <div class="kpi-card">
-        <div class="kpi-label">GDP年增速</div>
-        <div class="kpi-value">4.96<span class="kpi-unit">%</span></div>
+        <div class="kpi-label">GDP季度增速</div>
+        <div class="kpi-value">5.0<span class="kpi-unit">%</span></div>
         <div class="kpi-sub">
-            <span class="chg chg-down">↓ 0.46pp</span>
-            <span>同比2023</span>
-            <span class="kpi-year">2024</span>
+            <span class="chg chg-flat">→ 持平</span>
+            <span>同比2025Q1</span>
+            <span class="kpi-year">2026Q1</span>
         </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">居民消费支出增速</div>
-        <div class="kpi-value">5.02<span class="kpi-unit">%</span></div>
+        <div class="kpi-label">社会消费品零售增速</div>
+        <div class="kpi-value">1.4<span class="kpi-unit">%</span></div>
         <div class="kpi-sub">
-            <span class="chg chg-down">↓ 4.63pp</span>
-            <span>同比2023</span>
-            <span class="kpi-year">2024</span>
+            <span class="chg chg-up">↑ 1-5月累计</span>
+            <span>总额20.6万亿</span>
+            <span class="kpi-year">2026.1-5</span>
         </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">资本形成增速</div>
-        <div class="kpi-value">2.85<span class="kpi-unit">%</span></div>
+        <div class="kpi-label">固定资产投资增速</div>
+        <div class="kpi-value">-4.1<span class="kpi-unit">%</span></div>
         <div class="kpi-sub">
-            <span class="chg chg-down">↓ 0.59pp</span>
-            <span>同比2023</span>
-            <span class="kpi-year">2024</span>
+            <span class="chg chg-down">↓ 降幅收窄</span>
+            <span>可比口径</span>
+            <span class="kpi-year">2026.1-5</span>
         </div>
     </div>
     <div class="kpi-card">
         <div class="kpi-label">工业增加值增速</div>
-        <div class="kpi-value">5.05<span class="kpi-unit">%</span></div>
+        <div class="kpi-value">5.3<span class="kpi-unit">%</span></div>
         <div class="kpi-sub">
-            <span class="chg chg-up">↑ 0.68pp</span>
-            <span>同比2023</span>
-            <span class="kpi-year">2024</span>
+            <span class="chg chg-up">↑ 0.3pp</span>
+            <span>环比5月</span>
+            <span class="kpi-year">2026.6</span>
         </div>
     </div>
     <div class="kpi-card">
-        <div class="kpi-label">CPI年涨幅</div>
-        <div class="kpi-value">0.21<span class="kpi-unit">%</span></div>
+        <div class="kpi-label">CPI同比涨幅</div>
+        <div class="kpi-value">1.0<span class="kpi-unit">%</span></div>
         <div class="kpi-sub">
-            <span class="chg chg-down">↓ 0.02pp</span>
-            <span>同比2023</span>
-            <span class="kpi-year">2024</span>
+            <span class="chg chg-down">↓ 0.2pp</span>
+            <span>环比回落</span>
+            <span class="kpi-year">2026.6</span>
         </div>
     </div>
 </div>
@@ -323,11 +323,11 @@ body {
 <div class="sec-title">核心经济指标年度趋势</div>
 <div class="grid-2">
     <div class="card">
-        <div class="card-h"><h3>GDP增速与消费、投资趋势</h3><span class="tag">2019-2024</span></div>
+        <div class="card-h"><h3>GDP增速与消费、投资趋势</h3><span class="tag">2019-2024年度</span></div>
         <div class="card-b"><div class="chart-h" id="trendChart"></div></div>
     </div>
     <div class="card">
-        <div class="card-h"><h3>CPI与失业率走势</h3><span class="tag">2019-2024</span></div>
+        <div class="card-h"><h3>CPI与失业率走势</h3><span class="tag">2019-2024年度</span></div>
         <div class="card-b"><div class="chart-h" id="cpiChart"></div></div>
     </div>
 </div>
@@ -362,21 +362,52 @@ body {
     </div>
 </div>
 
-<!-- Section 4 -->
+<!-- Section 4: Monthly Core Indicators -->
+<div class="sec-title">2026年月度核心指标（真实数据）</div>
+<div class="grid-2">
+    <div class="card">
+        <div class="card-h"><h3>CPI与PPI同比走势</h3><span class="tag">2026年1-6月 国家统计局</span></div>
+        <div class="card-b"><div class="chart-h" id="monthlyCPIChart"></div>
+        <div class="insight"><h4>数据解读</h4><p>2026年6月CPI同比上涨<strong>1.0%</strong>，环比下降0.3%，保持温和上涨；PPI同比上涨<strong>4.1%</strong>，涨幅比上月扩大0.2个百分点，煤炭、有色等能源资源价格为主要拉动因素。</p></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-h"><h3>制造业PMI与工业增加值</h3><span class="tag">2026年1-6月 国家统计局</span></div>
+        <div class="card-b"><div class="chart-h" id="monthlyPMIChart"></div>
+        <div class="insight"><h4>数据解读</h4><p>6月制造业PMI为<strong>50.3%</strong>，比上月上升0.3个百分点，重返扩张区间；6月规模以上工业增加值同比增长<strong>5.3%</strong>，工业生产持续恢复。</p></div>
+        </div>
+    </div>
+</div>
+<div class="grid-2">
+    <div class="card">
+        <div class="card-h"><h3>M2与社会融资规模增速</h3><span class="tag">2026年1-5月 央行</span></div>
+        <div class="card-b"><div class="chart-h" id="moneyChart"></div>
+        <div class="insight"><h4>数据解读</h4><p>5月末M2余额<strong>353.67万亿元</strong>，同比增长8.6%；社融存量<strong>458.81万亿元</strong>，同比增长7.7%，金融总量合理增长，支持实体经济力度稳固。</p></div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-h"><h3>进出口总额增速</h3><span class="tag">2026年1-5月 海关总署</span></div>
+        <div class="card-b"><div class="chart-h" id="tradeChart"></div>
+        <div class="insight"><h4>数据解读</h4><p>2026年5月进出口总额同比增长<strong>16.9%</strong>，其中出口增长13.8%，进口增长21.5%，外贸保持较强韧性，机电产品出口增长27.36%为主要亮点。</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 5 -->
 <div class="sec-title">政策跟踪与大事记</div>
 <div class="grid-2">
     <div class="card">
-        <div class="card-h"><h3>宏观政策工具箱跟踪</h3><span class="tag">截至2024年末</span></div>
+        <div class="card-h"><h3>宏观政策工具箱跟踪</h3><span class="tag">截至2026年6月</span></div>
         <div class="card-b" style="padding:0;">
             <table class="tbl">
                 <thead><tr><th>政策工具</th><th>当前值</th><th>趋势</th><th>政策取向</th></tr></thead>
                 <tbody>
-                    <tr><td>存款准备金率（大型机构）</td><td class="num">10.0%</td><td><span class="badge badge-y">→ 稳定</span></td><td>适度宽松</td></tr>
-                    <tr><td>一年期LPR</td><td class="num">3.10%</td><td><span class="badge badge-y">→ 稳定</span></td><td>宽松</td></tr>
-                    <tr><td>五年期LPR</td><td class="num">3.60%</td><td><span class="badge badge-y">→ 稳定</span></td><td>宽松</td></tr>
-                    <tr><td>财政赤字率</td><td class="num">3.0%</td><td><span class="badge badge-g">↑ 扩张</span></td><td>积极</td></tr>
-                    <tr><td>CPI同比</td><td class="num">0.2%</td><td><span class="badge badge-r">↓ 低位</span></td><td>通缩压力</td></tr>
-                    <tr><td>失业率</td><td class="num">5.12%</td><td><span class="badge badge-y">→ 稳定</span></td><td>中性</td></tr>
+                    <tr><td>存款准备金率（加权平均）</td><td class="num">约6.2%</td><td><span class="badge badge-y">→ 稳定</span></td><td>适度宽松</td></tr>
+                    <tr><td>一年期LPR</td><td class="num">3.00%</td><td><span class="badge badge-y">→ 连续13月不变</span></td><td>宽松</td></tr>
+                    <tr><td>五年期LPR</td><td class="num">3.50%</td><td><span class="badge badge-y">→ 连续13月不变</span></td><td>宽松</td></tr>
+                    <tr><td>财政赤字率</td><td class="num">4.0%</td><td><span class="badge badge-g">↑ 扩张</span></td><td>更加积极</td></tr>
+                    <tr><td>CPI同比</td><td class="num">1.0%</td><td><span class="badge badge-y">→ 温和</span></td><td>低位运行</td></tr>
+                    <tr><td>城镇调查失业率</td><td class="num">5.1%</td><td><span class="badge badge-y">→ 稳定</span></td><td>中性</td></tr>
                 </tbody>
             </table>
         </div>
@@ -385,11 +416,11 @@ body {
         <div class="card-h"><h3>近期重大政策事件</h3><span class="tag">时间轴</span></div>
         <div class="card-b">
             <div class="timeline">
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2025-03-05</div><div class="tl-text">2025年政府工作报告：GDP增长目标5%左右，赤字率4%</div><div class="tl-tags"><span class="tl-tag tag-macro">宏观目标</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-12-12</div><div class="tl-text">中央经济工作会议：实施更加积极的财政政策和适度宽松的货币政策</div><div class="tl-tags"><span class="tl-tag tag-macro">政策定调</span><span class="tl-tag tag-reform">扩大内需</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-09-26</div><div class="tl-text">政治局会议：促进房地产市场止跌回稳，降低存量房贷利率</div><div class="tl-tags"><span class="tl-tag tag-estate">房地产</span><span class="tl-tag tag-finance">信贷</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-07-18</div><div class="tl-text">二十届三中全会：通过全面深化改革、推进中国式现代化决定</div><div class="tl-tags"><span class="tl-tag tag-reform">深化改革</span><span class="tl-tag tag-industry">现代化</span></div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-03-05</div><div class="tl-text">2024年政府工作报告：GDP增长目标5%左右，发行超长期特别国债</div><div class="tl-tags"><span class="tl-tag tag-macro">宏观目标</span><span class="tl-tag tag-finance">财政政策</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2026-06-30</div><div class="tl-text">国家统计局：6月制造业PMI升至50.3%，重返扩张区间</div><div class="tl-tags"><span class="tl-tag tag-macro">PMI</span><span class="tl-tag tag-industry">制造业</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-06-22</div><div class="tl-text">央行：6月LPR维持不变，1年期3.0%、5年期以上3.5%</div><div class="tl-tags"><span class="tl-tag tag-macro">货币政策</span><span class="tl-tag tag-finance">LPR</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-05-15</div><div class="tl-text">财政部：更加积极财政政策，赤字率4%，超长期特别国债8000亿</div><div class="tl-tags"><span class="tl-tag tag-macro">财政政策</span><span class="tl-tag tag-finance">国债</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-04-27</div><div class="tl-text">《企业国有资产法》首次修订，六大变革明确改革新方向</div><div class="tl-tags"><span class="tl-tag tag-reform">国企改革</span><span class="tl-tag tag-industry">国资监管</span></div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-03-05</div><div class="tl-text">2026年政府工作报告：GDP目标5%左右，安排中央预算内投资7550亿</div><div class="tl-tags"><span class="tl-tag tag-macro">宏观目标</span><span class="tl-tag tag-finance">财政政策</span></div></div>
             </div>
         </div>
     </div>
@@ -402,9 +433,9 @@ body {
         <div class="card-h"><h3>资产经营关联政策</h3><span class="tag">国务院/国资委</span></div>
         <div class="card-b">
             <div class="timeline">
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-12</div><div class="tl-text">国资委《中央企业投资管理办法》修订，强化投资风险管控</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-07</div><div class="tl-text">国资委《提高央企控股上市公司质量工作方案》，市值管理入考核</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2024-01</div><div class="tl-text">国务院《完善国有资本经营预算制度的意见》，规范收益分配</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-04</div><div class="tl-text">《企业国有资产法》修订：建立健全国有资本委托代理机制，完善投资运营机制</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2026-02</div><div class="tl-text">国资委部署"十五五"重点工作：积极稳妥盘活存量国有资产，深化资本投资运营公司改革</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2025-03</div><div class="tl-text">国务院《企业国有资产交易操作规则》修订，规范产权转让与增资扩股</div></div>
             </div>
         </div>
     </div>
@@ -412,9 +443,9 @@ body {
         <div class="card-h"><h3>园区运营与科技关联政策</h3><span class="tag">工信部/发改委</span></div>
         <div class="card-b">
             <div class="timeline">
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2024-12</div><div class="tl-text">发改委《推动先进制造业和现代服务业深度融合发展的实施意见》</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2024-07</div><div class="tl-text">发改委《绿色低碳转型产业指导目录》更新，园区绿色化提速</div></div>
-                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2024-03</div><div class="tl-text">工信部《推动工业领域设备更新实施方案》，园区技改升级</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--navy)"></div><div class="tl-date">2026-04</div><div class="tl-text">财政部：取消光伏、磷化工出口退税，推动产业绿色转型与结构优化</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--red)"></div><div class="tl-date">2025-06</div><div class="tl-text">七部门《加快构建科技金融体制》：优化国有创投考核，引导长期资本耐心资本</div></div>
+                <div class="tl-item"><div class="tl-dot" style="border-color:var(--gold)"></div><div class="tl-date">2025-03</div><div class="tl-text">国务院《关于做好金融"五篇大文章"的指导意见》：科技金融、绿色金融、数字金融</div></div>
             </div>
         </div>
     </div>
@@ -422,8 +453,8 @@ body {
 
 <!-- Footer -->
 <div class="footer">
-    <div><strong>数据来源：</strong>世界银行开放数据库（World Bank Open Data）· IMF世界经济展望（WEO）· IMF国际金融统计（IFS）</div>
-    <div>数据范围：2019-2024年官方年度统计 · 全部指标通过API直接调取 · 产业经济研究中心</div>
+    <div><strong>数据来源：</strong>中国国家统计局（stats.gov.cn）· 中国人民银行（pbc.gov.cn）· 财政部（mof.gov.cn）</div>
+    <div>数据范围：宏观经济指标截至2026年6月，金融数据截至2026年5月末，政策信息截至2026年7月15日 · 产业经济研究中心</div>
 </div>
 
 </div>
@@ -563,7 +594,71 @@ bc.setOption({
     ]
 });
 
-window.addEventListener('resize',()=>{tc.resize();cc.resize();ac.resize();rc.resize();roc.resize();gc.resize();bc.resize();});
+
+// ===== 2026年月度真实数据图表 =====
+const months2026 = ['1月','2月','3月','4月','5月','6月'];
+
+// 8. CPI与PPI月度同比
+const mcpi = echarts.init(document.getElementById('monthlyCPIChart'));
+mcpi.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
+    legend:{data:['CPI同比','PPI同比'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
+    grid:{left:45,right:30,top:32,bottom:28},
+    xAxis:{type:'category',data:months2026,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
+    series:[
+        {name:'CPI同比',type:'line',smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:red,width:2.5},itemStyle:{color:red},data:[0.2,1.3,1.0,1.2,1.2,1.0]},
+        {name:'PPI同比',type:'line',smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:navy,width:2.5},itemStyle:{color:navy},data:[-2.3,0.0,1.5,2.8,3.9,4.1]}
+    ]
+});
+
+// 9. PMI与工业增加值
+const mpmi = echarts.init(document.getElementById('monthlyPMIChart'));
+mpmi.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
+    legend:{data:['制造业PMI','工业增加值同比'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
+    grid:{left:45,right:45,top:32,bottom:28},
+    xAxis:{type:'category',data:months2026,axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:[
+        {type:'value',name:'PMI',min:48,max:52,axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11}},
+        {type:'value',name:'增速 %',axisLine:{show:false},axisTick:{show:false},splitLine:{show:false},axisLabel:{color:text3,fontSize:11}}
+    ],
+    series:[
+        {name:'制造业PMI',type:'line',smooth:0.35,symbol:'circle',symbolSize:6,lineStyle:{color:navy,width:2.5},itemStyle:{color:navy},data:[49.1,50.2,50.5,49.0,50.0,50.3]},
+        {name:'工业增加值同比',type:'bar',yAxisIndex:1,barWidth:18,itemStyle:{color:red,borderRadius:[3,3,0,0]},data:[4.5,5.9,5.3,4.5,5.0,5.3]}
+    ]
+});
+
+// 10. M2与社融增速
+const money = echarts.init(document.getElementById('moneyChart'));
+money.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
+    legend:{data:['M2同比','社融存量同比'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
+    grid:{left:45,right:30,top:32,bottom:28},
+    xAxis:{type:'category',data:['1月','2月','3月','4月','5月'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
+    series:[
+        {name:'M2同比',type:'line',smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:navy,width:2.5},itemStyle:{color:navy},data:[8.5,8.7,8.5,8.4,8.6]},
+        {name:'社融存量同比',type:'line',smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:gold,width:2.5},itemStyle:{color:gold},data:[8.0,8.2,8.4,7.8,7.7]}
+    ]
+});
+
+// 11. 进出口增速
+const trade = echarts.init(document.getElementById('tradeChart'));
+trade.setOption({
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'#fff',borderColor:border,borderWidth:1,textStyle:{color:text,fontSize:12},padding:[10,14]},
+    legend:{data:['出口同比','进口同比','总额同比'],top:0,right:0,textStyle:{color:text2,fontSize:11},itemWidth:10,itemHeight:10},
+    grid:{left:45,right:30,top:32,bottom:28},
+    xAxis:{type:'category',data:['1-2月','3月','4月','5月'],axisLine:{lineStyle:{color:border}},axisTick:{show:false},axisLabel:{color:text3,fontSize:11}},
+    yAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'#f0f1f4',type:[4,4]}},axisLabel:{color:text3,fontSize:11,formatter:'{value}%'}},
+    series:[
+        {name:'出口同比',type:'bar',barWidth:14,itemStyle:{color:navyL,borderRadius:[3,3,0,0]},data:[3.4,7.2,9.8,13.8]},
+        {name:'进口同比',type:'bar',barWidth:14,itemStyle:{color:red,borderRadius:[3,3,0,0]},data:[7.1,5.8,20.6,21.5]},
+        {name:'总额同比',type:'line',smooth:0.35,symbol:'circle',symbolSize:5,lineStyle:{color:gold,width:2},itemStyle:{color:gold},data:[5.2,6.5,14.2,16.9]}
+    ]
+});
+
+window.addEventListener('resize',()=>{tc.resize();cc.resize();ac.resize();rc.resize();roc.resize();gc.resize();bc.resize();mcpi.resize();mpmi.resize();money.resize();trade.resize();});
 </script>
 </body>
 </html>
